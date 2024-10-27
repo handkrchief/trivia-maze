@@ -1,6 +1,9 @@
 package model;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -47,6 +50,90 @@ public class Question {
         this.myCorrectAnswer = setMyCorrectAnswer(theCorrectAnswer);
         this.myChoices = setMyChoices(theChoices);
     }
+    
+    /**
+     * Applies the item's effect to the current question.
+     * 
+     * If the item is "Phone-a-Friend", it will reveal the correct answer.
+     * If the item is "50-50", it will randomly eliminate two incorrect answers from myChoices.
+     * 
+     * @param theItem the item to be applied, such as "Phone-a-Friend" or "50-50".
+     */
+    public void applyItem(Item theItem) {
+        String itemType = theItem.getItemType();
+        if (itemType.equals("Phone-a-Friend")) {
+            this.applyPhoneAFriend();
+        } else if (itemType.equals("50-50")) {
+            this.applyFiftyFifty();
+        }
+    }
+
+    /**
+     * Phone-a-Friend power-up.
+     * 
+     * Simulates a 'phone a friend' life-line. There is a 10% chance that the friend 
+     * will give the wrong answer, otherwise they give the correct answer.
+     */
+    private void applyPhoneAFriend() {
+        Random random = new Random();
+        int chance = random.nextInt(100);
+        
+        if (chance < 10) {
+            String wrongAnswer = getRandomWrongAnswer();
+            System.out.println("Phone-a-Friend: says '" + wrongAnswer + "' is the correct answer.");
+        } else {
+            System.out.println("Phone-a-Friend: says '" + this.getMyCorrectAnswer() + "' is the correct answer.");
+        }
+    }
+    
+    /**
+     * Chooses a random incorrect answer.
+     * 
+     * @return a random incorrect answer.
+     */
+    private String getRandomWrongAnswer() {
+        Random random = new Random();
+        List<String> wrongAnswers = new ArrayList<>();
+        
+        for (String choice : myChoices) {
+            if (!choice.equals(myCorrectAnswer) && !choice.equals(INCORRECT_TEXT)) {
+                wrongAnswers.add(choice);
+            }
+        }
+        
+        return wrongAnswers.get(random.nextInt(wrongAnswers.size()));
+    }
+
+    /**
+     * 50-50 power-up.
+     * 
+     * Randomly eliminates two incorrect answers from the current choices, ensuring
+     * that the correct answer is never removed. If any incorrect choices have
+     * already been eliminated (marked by "INCORRECT_TEXT"), this power-up cannot be used.
+     */
+    private void applyFiftyFifty() {
+        // Prevent use if incorrect answers have already been removed
+        if (myChoices.contains(INCORRECT_TEXT)) {
+            System.out.println("This can only be used on the first turn.");
+            return;
+        }
+
+        Random rand = new Random();
+        int eliminated = 0;
+        int correctAnswerIndex = myChoices.indexOf(myCorrectAnswer);
+
+        // Randomly eliminate two incorrect choices, avoiding the correct answer
+        while (eliminated < 2) {
+            int idx = rand.nextInt(myChoices.size());
+            if (idx != correctAnswerIndex && !myChoices.get(idx).equals(INCORRECT_TEXT)) {
+                myChoices.set(idx, INCORRECT_TEXT);
+                eliminated++;
+            }
+        }
+
+        System.out.println("Fifty-fifty applied. Two incorrect answers have been removed.");
+    }
+
     
     /**
      * Marks a specific choice as incorrect by replacing it with a static string.
