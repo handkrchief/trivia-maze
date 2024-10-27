@@ -16,14 +16,18 @@ public class CanBeDeletedTestFile {
 				"A Test Answer",
 				theAnswer
 				);
-<<<<<<< Updated upstream
-		
-=======
+
 		Item ff = new Item("50-50");
 		Item PaF = new Item("Phone-a-Friend");
-		test.applyItem(PaF);
->>>>>>> Stashed changes
-		test.askQuestion();
+//		test.applyItem(PaF);
+//		test.askQuestion();
+		Room aRoom = new Room(true, test, ff);
+		Item i = aRoom.getItem();
+		System.out.println("toString Test:"+i);
+		Question q = aRoom.getQuestion();
+		System.out.println("toString Test:"+q);
+		q.askQuestion();
+
 	}
 
 }
