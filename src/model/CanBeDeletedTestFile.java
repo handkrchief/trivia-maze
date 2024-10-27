@@ -16,7 +16,13 @@ public class CanBeDeletedTestFile {
 				"A Test Answer",
 				theAnswer
 				);
+<<<<<<< Updated upstream
 		
+=======
+		Item ff = new Item("50-50");
+		Item PaF = new Item("Phone-a-Friend");
+		test.applyItem(PaF);
+>>>>>>> Stashed changes
 		test.askQuestion();
 	}
 
