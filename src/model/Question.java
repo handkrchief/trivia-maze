@@ -1,6 +1,5 @@
 package model;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -112,7 +111,7 @@ public class Question {
      * already been eliminated (marked by "INCORRECT_TEXT"), this power-up cannot be used.
      */
     private void applyFiftyFifty() {
-        // Prevent use if incorrect answers have already been removed
+
         if (myChoices.contains(INCORRECT_TEXT)) {
             System.out.println("This can only be used on the first turn.");
             return;
@@ -122,7 +121,6 @@ public class Question {
         int eliminated = 0;
         int correctAnswerIndex = myChoices.indexOf(myCorrectAnswer);
 
-        // Randomly eliminate two incorrect choices, avoiding the correct answer
         while (eliminated < 2) {
             int idx = rand.nextInt(myChoices.size());
             if (idx != correctAnswerIndex && !myChoices.get(idx).equals(INCORRECT_TEXT)) {
@@ -271,4 +269,10 @@ public class Question {
             System.out.println("Incorrect!");
         }
     }
+
+    
+    public String toString() {
+    	return this.getMyQuestionText();
+    }
+
 }

@@ -47,4 +47,9 @@ public class Item {
         }
         throw new IllegalArgumentException("Invalid Argument: theItemType string was blank/null.");
     }
+
+    public String toString(){
+    	return this.getItemType();
+    }
+
 }
