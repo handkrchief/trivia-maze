@@ -17,7 +17,6 @@ import java.util.Random;
  * If you'd like to find more information regarding maze generation with Prim's Algorithm
  * https://jonathanzong.com/blog/2012/11/06/maze-generation-with-prims-algorithm
  * 
-
  * @author Ethan Moore (handkrchief)
  * @version October 27th, 2024
  * 
