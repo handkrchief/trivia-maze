@@ -19,11 +19,11 @@ public class Room {
     /** Indicates whether the room is locked (due to incorrect answer). */
     private boolean isLocked;
     
-    /** Indicates whether the room is a trivia room or not. */
-    private boolean isTriviaRoom;
-    
     /** Indicates whether the room is a bonus item room or not. */
     private boolean isItemRoom;
+    
+    /** Indicates whether the question of the room has been answered or not. */
+    private boolean isAnswered;
     
     /** The question that must be answered in the room. */
     private final Question myQuestion;
@@ -43,8 +43,8 @@ public class Room {
         this.myCol = theCol;
         this.isOpen = false; // Default to not open (walls)
         this.isLocked = false;
-        this.isTriviaRoom = false;
         this.isItemRoom = false;
+        this.isAnswered = false;
         this.myQuestion = null;
         this.myItem = null;
     }
@@ -79,24 +79,6 @@ public class Room {
      */
     public void setLocked(boolean isLocked) {
         this.isLocked = isLocked;
-    }
-
-    /**
-     * Returns whether the room is a trivia room.
-     * 
-     * @return true if the room is a trivia room, false otherwise.
-     */
-    public boolean isTriviaRoom() {
-        return isTriviaRoom;
-    }
-
-    /**
-     * Sets whether the room should be a trivia room.
-     * 
-     * @param isTriviaRoom true to make the room a trivia room, false otherwise.
-     */
-    public void setTriviaRoom(boolean isTriviaRoom) {
-        this.isTriviaRoom = isTriviaRoom;
     }
 
     /**
@@ -163,6 +145,22 @@ public class Room {
      */
     public void setItem(Item theItem) {
         this.myItem = theItem;
+    }
+    
+    /**
+     * Checks if the rooms question has been answered.
+     * 
+     * @return true if the question has been answered, false otherwise.
+     */
+    public boolean isAnswered() {
+    	return this.isAnswered;
+    }
+    
+    /**
+     * Sets the answer status of the room's question to true.
+     */
+    public void setAnswered() {
+    	this.isAnswered = true;
     }
 
     /**

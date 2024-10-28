@@ -28,7 +28,6 @@ public class Maze {
      * <li>5: Starting room, sets the room to be open.</li>
      * <li>9: Exit room, sets the room to be open.</li>
      * <li>1: Open path room.</li>
-     * <li>2: Trivia room, where a question must be answered.</li>
      * <li>4: Item room, contains a bonus item.</li>
      * </ul>
      * 
@@ -52,13 +51,8 @@ public class Maze {
                     case 9:
                         myExitRoom = myRooms[i][j];
                         myExitRoom.openRoom();
-                        // Fall through to case 1 to ensure the exit room is also open
                     case 1:
                         myRooms[i][j].openRoom();
-                        break;
-                    case 2:
-                        myRooms[i][j].setTriviaRoom(true);
-                        // myRooms[i][j].setQuestion() to be used when trivia questions are set
                         break;
                     case 4:
                         myRooms[i][j].setItemRoom(true);
