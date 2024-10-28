@@ -5,6 +5,7 @@ package model;
  * Each item has a type, such as "50-50" or "Phone-a-Friend".
  * 
  * @author Zach Sanchez (zachs00)
+ * 
  * @version October 26th, 2024
  */
 public class Item {
