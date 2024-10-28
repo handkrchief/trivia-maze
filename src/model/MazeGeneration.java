@@ -17,12 +17,12 @@ import java.util.Random;
  * If you'd like to find more information regarding maze generation with Prim's Algorithm
  * https://jonathanzong.com/blog/2012/11/06/maze-generation-with-prims-algorithm
  * 
+
  * @author Ethan Moore (handkrchief)
  * @version October 27th, 2024
  * 
  */
 public class MazeGeneration {
-	
 	
 	/**
 	 * Generates a maze using Prim's algorithm, then adds trivia doors and bonus item rooms.
@@ -64,7 +64,7 @@ public class MazeGeneration {
 		myMaze[0][0] = 5;
 		// Set an exit point for the maze (opening the path)
 		myMaze[theSize-1][theSize-1] = 9;
-		
+
 		generateBonus(myMaze, theSize);
 		
 		return myMaze;
@@ -107,6 +107,7 @@ public class MazeGeneration {
 	}
 	
 	/**
+
 	 * Randomly generates bonus rooms in the maze, marked as 4.
 	 * 
 	 * @param theMaze the current maze grid.
@@ -134,5 +135,5 @@ public class MazeGeneration {
 	private static boolean isWithinBounds (int x, int y, int n) {
 		return x >= 0 && x < n && y >= 0 && y < n;
 	}
-	
+  
 }
