@@ -9,7 +9,6 @@ import java.util.Random;
  * 
  * 0's represent walls
  * 1's represent viable path
- * 2's represent trivia doors
  * 3's represent locked doors (answer failed)
  * 4's represent bonus rooms
  * 5 represents the start point
@@ -18,13 +17,12 @@ import java.util.Random;
  * If you'd like to find more information regarding maze generation with Prim's Algorithm
  * https://jonathanzong.com/blog/2012/11/06/maze-generation-with-prims-algorithm
  * 
- * @author Ethan Moore
- * @version 1.0
+
+ * @author Ethan Moore (handkrchief)
+ * @version October 27th, 2024
  * 
  */
 public class MazeGeneration {
-	
-	final private static int MAZE_SIZE = 5;
 	
 	/**
 	 * Generates a maze using Prim's algorithm, then adds trivia doors and bonus item rooms.
@@ -66,8 +64,7 @@ public class MazeGeneration {
 		myMaze[0][0] = 5;
 		// Set an exit point for the maze (opening the path)
 		myMaze[theSize-1][theSize-1] = 9;
-		
-		generateDoors(myMaze, theSize);
+
 		generateBonus(myMaze, theSize);
 		
 		return myMaze;
@@ -110,23 +107,7 @@ public class MazeGeneration {
 	}
 	
 	/**
-	 * Randomly generates trivia doors in the maze, marked as 2.
-	 * 
-	 * @param theMaze the current maze grid.
-	 * @param theSize the size of the maze grid.
-	 */
-	private static void generateDoors(int[][] theMaze, int theSize) {
-		Random rand = new Random();
-		for (int i = 0; i < theSize; i++) {
-			for (int j = 0; j < theSize; j++) {
-				if (theMaze[i][j] == 1 && rand.nextInt(100) < 10) { // 10% chance to place a door
-					theMaze[i][j] = 2;
-				}
-			}
-		}
-	}
-	
-	/**
+
 	 * Randomly generates bonus rooms in the maze, marked as 4.
 	 * 
 	 * @param theMaze the current maze grid.
@@ -154,22 +135,5 @@ public class MazeGeneration {
 	private static boolean isWithinBounds (int x, int y, int n) {
 		return x >= 0 && x < n && y >= 0 && y < n;
 	}
-
-	/**
-	 * Main method to run the maze generation and print the generated maze to the console.
-	 * (POC TESTING PURPOSES ONLY)
-	 * @param args command-line arguments (not used).
-	 */
-	public static void main(String[] args) {
-		
-		int[][] myMaze = mazeGeneration(MAZE_SIZE);
-		
-		for (int[] x : myMaze) {
-		   for (int y : x) {
-		        System.out.print(y + " ");
-		   }
-		   System.out.println();
-		}
-	}
-
+  
 }

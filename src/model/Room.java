@@ -1,49 +1,120 @@
 package model;
 
 /**
- * Represents a room in the maze that can either be open or closed, so i guess its sort of a wall too.
- * A room can have a question and (maybe) item.
+ * Represents a room in the maze that can either be open or closed (similar to a wall).
+ * A room can have a question and/or an item.
  * 
  * @author Zach Sanchez (zachs00)
+ * @author Ethan Moore (handkrchief)
  * @version October 27th, 2024
  */
 public class Room {
 
+    /** Coordinates of the room in the maze */
+    private final int myRow, myCol;
+    
     /** Indicates whether the room is open or closed (wall vs path). */
     private boolean isOpen;
+    
+    /** Indicates whether the room is locked (due to incorrect answer). */
+    private boolean isLocked;
+    
+    /** Indicates whether the room is a bonus item room or not. */
+    private boolean isItemRoom;
+    
+    /** Indicates whether the question of the room has been answered or not. */
+    private boolean isAnswered;
     
     /** The question that must be answered in the room. */
     private final Question myQuestion;
     
     /** The item (if any) found in the room. */
-    private final Item myItem;
+    private Item myItem;
 
     /**
-     * Constructs a Room with the specified open status, question, and item.
+     * Constructor to initialize the Room with specified coordinates.
+     * By default, the room is not open, not locked, and has no question or item.
      * 
-     * @param theOpenStatus whether the room is open (true) or closed (false).
-     * @param theQuestion the question associated with the room.
-     * @param theItem the item found in the room, can be null if no item is present.
-     * @throws IllegalArgumentException if theQuestion is null.
+     * @param theRow the row coordinate of the room.
+     * @param theCol the column coordinate of the room.
      */
-    public Room(boolean theOpenStatus, Question theQuestion, Item theItem) {
-        myQuestion = this.setQuestion(theQuestion);
-        myItem = this.setItem(theItem);
-        isOpen = theOpenStatus;
+    public Room(int theRow, int theCol) {
+        this.myRow = theRow;
+        this.myCol = theCol;
+        this.isOpen = false; // Default to not open (walls)
+        this.isLocked = false;
+        this.isItemRoom = false;
+        this.isAnswered = false;
+        this.myQuestion = null;
+        this.myItem = null;
     }
 
     /**
-     * Sets room status to closed.
+     * Sets the room status to closed (turns it into a wall).
      */
     public void closeRoom() {
         this.isOpen = false;
     }
 
     /**
-     * Sets Room status to open.
+     * Sets the room status to open (turns it into a path).
      */
     public void openRoom() {
         this.isOpen = true;
+    }
+
+    /**
+     * Returns whether the room is locked or not.
+     * 
+     * @return true if the room is locked, false otherwise.
+     */
+    public boolean isLocked() {
+        return isLocked;
+    }
+
+    /**
+     * Sets the room's lock status.
+     * 
+     * @param isLocked true to lock the room, false to unlock it.
+     */
+    public void setLocked(boolean isLocked) {
+        this.isLocked = isLocked;
+    }
+
+    /**
+     * Returns whether the room contains an item.
+     * 
+     * @return true if the room contains an item, false otherwise.
+     */
+    public boolean isItemRoom() {
+        return isItemRoom;
+    }
+
+    /**
+     * Sets whether the room should contain an item.
+     * 
+     * @param isItemRoom true to make the room an item room, false otherwise.
+     */
+    public void setItemRoom(boolean isItemRoom) {
+        this.isItemRoom = isItemRoom;
+    }
+
+    /**
+     * Retrieves the column index of the room.
+     * 
+     * @return the column index of the room.
+     */
+    public int getCol() {
+        return myCol;
+    }
+
+    /**
+     * Retrieves the row index of the room.
+     * 
+     * @return the row index of the room.
+     */
+    public int getRow() {
+        return myRow;
     }
 
     /**
@@ -64,12 +135,32 @@ public class Room {
      * @return the item in the room, or null if no item is present.
      */
     public Item getItem() {
-        if (!this.hasItem()) {
-            System.out.println("The room has no item, so return null.");
-        } else {
-            System.out.println("The room has Power: " + myItem.getItemType() + "!");
-        }
         return myItem;
+    }
+
+    /**
+     * Sets the item in the room. The item can be set to null to remove it.
+     * 
+     * @param theItem the item to be set, or null if the room has no item.
+     */
+    public void setItem(Item theItem) {
+        this.myItem = theItem;
+    }
+    
+    /**
+     * Checks if the rooms question has been answered.
+     * 
+     * @return true if the question has been answered, false otherwise.
+     */
+    public boolean isAnswered() {
+    	return this.isAnswered;
+    }
+    
+    /**
+     * Sets the answer status of the room's question to true.
+     */
+    public void setAnswered() {
+    	this.isAnswered = true;
     }
 
     /**
@@ -82,9 +173,10 @@ public class Room {
     }
 
     /**
+     * Validates and sets the question for the room.
      * Ensures that the question is not null. Throws an IllegalArgumentException if the question is null.
      * 
-     * @param theQuestion.
+     * @param theQuestion the question to be set in the room.
      * @return the validated question.
      * @throws IllegalArgumentException if theQuestion is null.
      */
@@ -93,18 +185,5 @@ public class Room {
             return theQuestion;
         }
         throw new IllegalArgumentException("setQuestion: the Question provided was null.");
-    }
-
-    /**
-     * Ensures that the item is not null. If the item is null, the room will not have an item.
-     * 
-     * @param theItem the item to be set, or null if the room has no item.
-     * @return the item if valid, or null if no item is present.
-     */
-    private Item setItem(Item theItem) {
-        if (theItem != null) {
-            return theItem;
-        }
-        return null;
     }
 }
