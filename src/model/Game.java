@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Scanner;
+
 /**
  * Represents an instance of the TriviaMaze game. 
  * Contains the general objects like the Maze for the game, the Player of the game
@@ -11,6 +13,18 @@ package model;
  */
 public class Game {
     
+    /**
+     * My idea for saving and loading the game is just to use serialization.
+     * I did some research on it and I know that Ethan and I
+     * have done it last quarter for another project.
+     * It seems to be the simplest way to save the state of the game.
+     * The Maze object should countain a 2D array of all the rooms,
+     * and each of the rooms also has its own data that will be saved.
+     * I believe the Maze object and potentially the data from the Player object
+     * would be all we need to save and load the state of the game.
+     * -Caleb
+     */
+    
   private Maze myMaze;
   
   //private Player myPlayer; //commented out until player class is created to avoid error.
@@ -20,9 +34,13 @@ public class Game {
    * Starting the game could include choosing the size of the maze to be completed.
    */
   private void startGame() {
-      //TO-DO
+      System.out.println("Enter the size of the maze: ");
+      Scanner sc1 = new Scanner(System.in);
+      sc1.close();
+      int mazeSize = Integer.parseInt(sc1.toString());
+      myMaze = new Maze(MazeGeneration.mazeGeneration(mazeSize));
   }
-  
+
   /**
    * Responsible for handling the end of the game.
    * Saves the state of the game at its current stopping point.
@@ -49,5 +67,9 @@ public class Game {
   private void loadGame() {
       //TO-DO
   }
-    
+  
+  
+  //  private void setMaze(final Maze theMaze) {
+  //      this.myMaze = theMaze;
+  //  }
 }
