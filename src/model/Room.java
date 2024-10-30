@@ -82,9 +82,9 @@ public class Room {
     }
 
     /**
-     * Returns whether the room contains an item.
+     * Returns whether the room was generated with an item inside.
      * 
-     * @return true if the room contains an item, false otherwise.
+     * @return true if the room was generated with an item, false otherwise.
      */
     public boolean isItemRoom() {
         return isItemRoom;
@@ -118,9 +118,9 @@ public class Room {
     }
 
     /**
-     * Checks if the room contains an item.
+     * Checks if the room contains an item currently.
      * 
-     * @return true if the room contains an item, false otherwise.
+     * @return true if the room contains an item currently, false otherwise.
      */
     public boolean hasItem() {
         return this.myItem != null;
