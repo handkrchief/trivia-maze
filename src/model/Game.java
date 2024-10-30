@@ -11,6 +11,15 @@ package model;
  */
 public class Game {
     
+    /**
+     * After doing some research I think we should use serialization to
+     * save and load the state of the game. It seems like the most simple option.
+     * we would just have this Game class implement serializable, and then saveGame 
+     * and loadGame would call writeObject() and readObject() respectively.
+     * 
+     * -Caleb
+     */
+    
   private Maze myMaze;
   
   //private Player myPlayer; //commented out until player class is created to avoid error.
