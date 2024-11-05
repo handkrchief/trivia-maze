@@ -11,24 +11,22 @@ import org.junit.jupiter.api.Test;
 import model.Item;
 import model.Room;
 
+/**
+ * JUnit tests for the Room class.
+ * @author Caleb Carroll (uwnetid: calebca)
+ * @version 11.05.2024
+ * 
+ */
 class RoomTests {
     Room theRoom;
     Item theItem;
-//    Question theQuestion;
-//    List<String> possibleAnswers;
+
     
 
     @BeforeEach
     void setUp() throws Exception {
         theRoom = new Room(0,0);
         theItem = new Item("50-50");
-//        possibleAnswers = new ArrayList<String>();
-//        possibleAnswers.add("Yes");
-//        possibleAnswers.add("No");
-//        possibleAnswers.add("What?");
-//        possibleAnswers.add("I don't Know!");
-//        theQuestion = new Question("Are Oranges Orange?", "Yes", possibleAnswers);
-        
     }
 
     @Test
@@ -109,5 +107,4 @@ class RoomTests {
         assertEquals(null, theRoom.getQuestion());
     }
     
-
 }
