@@ -48,7 +48,14 @@ public class Room {
         this.myQuestion = null;
         this.myItem = null;
     }
-
+    
+    /**
+     * 
+     */
+    public boolean getOpenState() {
+        return this.isOpen;
+    }
+    
     /**
      * Sets the room status to closed (turns it into a wall).
      */
