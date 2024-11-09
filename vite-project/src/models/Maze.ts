@@ -1,9 +1,30 @@
 import Room from "./Room";
 
+
+/**
+ * Maze class
+ * 
+ * This class represents a maze. It is a 2D array of Room objects, along with some other properties.
+ * 
+ * @author Ethan Moore
+ * @author Zach Sanchez
+ * @version 1.0
+*/
 export default class Maze{
 
+    /**
+     * 2D array of Room objects
+     */
     private myRooms:Room[][];
+
+    /**
+     * The starting room
+     */
     private myStartingRoom!: Room;
+
+    /**
+     * The exit room
+     */
     private myExitRoom!: Room;
 
     constructor(theMaze:number[][]){
@@ -37,15 +58,33 @@ export default class Maze{
         }
     }
 
-    public getStartingRoom(){
+
+    /**
+     * Get the starting room
+     * 
+     * @returns {Room} - The starting room
+    */
+    public getStartingRoom(): Room{
         return this.myStartingRoom;
     }
 
-    public getExitRoom(){
+    /**
+     * Get the exit room
+     * 
+     * @returns {Room} - The exit room
+    */
+    public getExitRoom() : Room{
         return this.myExitRoom;
     }
 
-    public getAdjacentRoom({currentRoom, direction}:{currentRoom:Room, direction:string}){
+    /**
+     * Get the room at a given row and column
+     * 
+     * @param {number} theRow - The row of the room
+     * @param {number} theCol - The column of the room
+     * @returns {Room} - The room at the given row and column, or null if not found/valid
+    */
+    public getAdjacentRoom({currentRoom, direction}:{currentRoom:Room, direction:string}): Room | null{
         let theRow:number = currentRoom.getRow();
         let theCol:number = currentRoom.getCol();
 
@@ -64,6 +103,10 @@ export default class Maze{
 
     }
 
+
+    /**
+     * Print the maze to the console
+    */
     public printMaze(){
         console.log("+" + "-".repeat(this.myRooms[0].length ) + "+");
         for(let i = 0; i < this.myRooms.length; i++){
