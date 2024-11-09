@@ -1,7 +1,20 @@
 .container{
-    @apply w-full flex  border-b border-gray-200 p-2 pb-4;
+    @apply w-full flex  border-b border-gray-200 p-2;
 }
 
 .title{
-    @apply text-2xl font-bold px-2;
+    @apply text-2xl font-bold px-2 w-full;
 }
+
+.buttonContainer{
+    @apply px-2 w-full flex justify-end items-center;
+}
+
+.button{
+    @apply bg-purple-800 text-white p-2 rounded hover:bg-purple-700 transition-all duration-300;
+}
+
+.disabledButton{
+    @apply bg-gray-400 text-white p-2 rounded hover:bg-gray-400 transition-all duration-300;
+}
+
