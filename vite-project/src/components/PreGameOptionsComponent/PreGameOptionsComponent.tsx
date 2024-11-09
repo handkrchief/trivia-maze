@@ -6,16 +6,18 @@ import { useEffect } from "react";
 
 export default function PreGameOptionsComponent() {
 
-    const {mySize, setMySize, setMyMaze, setLoading, setStarted} = useMazeContext();
+    const {mySize, setMySize, setMyMazeAsNumbers, setLoading, setStarted, setCurrentRoom, setMyMaze} = useMazeContext();
 
     const handleClickButton = async() => {
         try { 
           const myMazeGenerator:MazeGenerator = new MazeGenerator();
           const myMazeAsNumbers:number[][] = myMazeGenerator.mazeGeneration(mySize);
           const myMaze:Maze = new Maze(myMazeAsNumbers);
-          setMyMaze(myMazeAsNumbers);
+          setMyMazeAsNumbers(myMazeAsNumbers);
           setStarted(true);
+          setMyMaze(myMaze);
           myMaze.printMaze();
+          setCurrentRoom(myMaze.getStartingRoom());
         } catch (error) {
           console.error(error);
         } finally {
