@@ -1,8 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
+import Room from "../models/Room";
+import Maze from "../models/Maze";
 
 interface MazeContextType {
-  myMaze: number[][];
-  setMyMaze: React.Dispatch<React.SetStateAction<number[][]>>;
+  myMazeAsNumbers: number[] [];
+  setMyMazeAsNumbers: React.Dispatch<React.SetStateAction<number[][]>>;
+  myMaze: Maze | null;
+  setMyMaze: React.Dispatch<React.SetStateAction<Maze | null>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   mySize: number;
@@ -11,6 +15,9 @@ interface MazeContextType {
   setPowerUp: React.Dispatch<React.SetStateAction<string>>;
   started: boolean;
   setStarted: React.Dispatch<React.SetStateAction<boolean>>;
+  startOver: () => void;
+  currentRoom: Room | null;
+  setCurrentRoom: React.Dispatch<React.SetStateAction<Room | null>>;
 }
 
 export const MazeContext = createContext<MazeContextType | undefined>(undefined);
@@ -30,13 +37,23 @@ interface MazeContextProviderProps {
 
 
 export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ children }) => {
-  const [myMaze, setMyMaze] = useState<number[][]>([]);
+  const [myMazeAsNumbers, setMyMazeAsNumbers] = useState<number[][]>([]);
+  const [myMaze, setMyMaze] = useState<Maze | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [mySize, setMySize] = useState<number>(4);
   const [powerUp, setPowerUp] = useState<string>("");
   const [started, setStarted] = useState<boolean>(false);
+  const [currentRoom, setCurrentRoom] = useState<Room | null>(null);
+  const startOver = () => {
+    setMyMazeAsNumbers([]);
+    setMyMaze(null);
+    setLoading(true);
+    setStarted(false);
+  }
 
   const value: MazeContextType = {
+    myMazeAsNumbers,
+    setMyMazeAsNumbers,
     myMaze,
     setMyMaze,
     loading,
@@ -47,6 +64,9 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     setPowerUp,
     started,
     setStarted,
+    startOver,
+    currentRoom,
+    setCurrentRoom
   };
 
   return (

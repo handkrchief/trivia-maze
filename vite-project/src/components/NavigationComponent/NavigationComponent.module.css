@@ -1,0 +1,75 @@
+.container{
+    @apply flex flex-col items-center justify-center p-4 w-full; 
+}
+
+.buttonsContainer{
+    @apply flex flex-col items-center justify-center w-full ; 
+}
+
+.eastWestContainer{
+    @apply grid grid-cols-2 p-2 gap-2; 
+}
+
+.button{
+    @apply bg-purple-800 hover:bg-purple-700 duration-300 transition-colors text-white px-6 py-4 rounded-md; 
+}
+
+.disabledButton{
+    @apply bg-gray-500 text-white px-6 py-4 rounded-md; 
+}
+
+.circleContainer{
+    @apply border border-gray-100 p-6 rounded-full flex flex-row;
+}
+
+.outerCircleContainer{
+    @apply bg-gray-200  rounded-full flex flex-row h-full border;
+}
+
+.rightCircleContainer{
+    @apply bg-gray-300 p-6 rounded-full flex flex-row;
+}
+
+.circleButton{
+    @apply bg-purple-300 px-6 py-5 rounded-full;
+}
+
+.lightCircleButton{
+    @apply bg-purple-100 px-6 py-5 rounded-full;
+}
+
+.rightOuterCircleContainer{
+    @apply bg-gray-200 rounded-full flex flex-row p-2 pb-3 -mb-6;
+}
+
+.leftOuterCircleContainer{
+    @apply bg-gray-200 rounded-full flex flex-row p-2 pb-3 -mb-6;
+}
+
+.middleContainer{
+    @apply flex flex-col h-full items-center justify-center ;
+}
+
+
+.middleTextContainer{
+    @apply flex flex-col h-full items-center justify-center py-4 tracking-tighter ;
+}
+
+.middleText{
+    @apply text-sm font-bold text-gray-600;
+}
+
+.smallMiddleText{
+    @apply text-xs font-bold text-gray-600;
+}
+
+.slantedButtonsContainer{
+    @apply flex flex-row gap-4 h-full pt-14;
+} 
+
+
+.slantedButton{
+    @apply bg-gray-400 rounded-full px-6 py-1.5 transform -rotate-45;
+}
+
+

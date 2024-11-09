@@ -37,17 +37,21 @@ export default class Maze{
             
             switch(theMaze[i][j]){
                 case 5:
+                    this.myRooms[i][j].setTypeAsNumber(7);
                     this.myStartingRoom = this.myRooms[i][j];
                     this.myStartingRoom.setIsOpen(true);
                     break;
                 case 9:
+                    this.myRooms[i][j].setTypeAsNumber(9);
                     this.myExitRoom = this.myRooms[i][j];
                     this.myExitRoom.setIsOpen(true);
                     break;
                 case 1:
+                    this.myRooms[i][j].setTypeAsNumber(1);
                     this.myRooms[i][j].setIsOpen(true);
                     break;
                 case 4:
+                    this.myRooms[i][j].setTypeAsNumber(4);
                     this.myRooms[i][j].setIsItemRoom(true);
                     this.myRooms[i][j].setIsOpen(true);
                     break;
@@ -80,9 +84,9 @@ export default class Maze{
     /**
      * Get the room at a given row and column
      * 
-     * @param {number} theRow - The row of the room
-     * @param {number} theCol - The column of the room
-     * @returns {Room} - The room at the given row and column, or null if not found/valid
+     * @param theRow the row of the room
+     * @param theCol the column of the room
+     * @returns Room; the room at the given row and column, or null if not found/valid
     */
     public getAdjacentRoom({currentRoom, direction}:{currentRoom:Room, direction:string}): Room | null{
         let theRow:number = currentRoom.getRow();
@@ -103,7 +107,14 @@ export default class Maze{
 
     }
 
-
+    /**
+     * Get the maze 
+     * 
+     * @returns {Room[][]} - The maze
+    */
+    public getMaze():Room[][]{
+        return this.myRooms;
+    }
     /**
      * Print the maze to the console
     */

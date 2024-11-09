@@ -13,7 +13,7 @@ import Question from "./Question";
 export default class Room {
 
     /**
-     * The row of the room
+     * The row of the room 
      */
     private myRow: number;
     /**
@@ -44,6 +44,11 @@ export default class Room {
      * The item in the room
      */
     private myItem?: Item;
+
+    /**
+     * The type of the room as a number
+     */
+    private myTypeAsNumber: number;
     
     /**
      * Constructor for the Room class
@@ -60,6 +65,7 @@ export default class Room {
         this.isAnswered = false;
         this.myQuestion = undefined;
         this.myItem = undefined;
+        this.myTypeAsNumber = 0;
     }
 
     /**
@@ -132,6 +138,15 @@ export default class Room {
      */
     public getIsAnswered(){
         return this.isAnswered;
+    }
+
+    /** 
+     * Gets the type of the room as a number
+     * 
+     * @returns {number} - The type of the room as a number
+     */
+    public getTypeAsNumber(){
+        return this.myTypeAsNumber;
     }
 
     /**
@@ -214,6 +229,15 @@ export default class Room {
         if(openStatus !== null){
             this.isOpen = openStatus;
         }
+    }
+
+    /**
+     * Sets the type of the room as a number
+     * 
+     * @param {number} typeAsNumber - The type of the room as a number
+     */
+    public setTypeAsNumber(typeAsNumber:number){
+        this.myTypeAsNumber = typeAsNumber;
     }
 
     /**
