@@ -1,0 +1,7 @@
+.container{
+    @apply w-full flex  border-b border-gray-200 p-2 pb-4;
+}
+
+.title{
+    @apply text-2xl font-bold px-2;
+}
