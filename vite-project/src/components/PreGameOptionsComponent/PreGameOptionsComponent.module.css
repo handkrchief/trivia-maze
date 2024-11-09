@@ -1,0 +1,27 @@
+.container{
+    @apply flex flex-col items-center justify-center w-full p-4 border border-gray-200 rounded shadow;
+}
+
+
+.sizeContainer {
+    @apply w-full flex flex-col justify-center ;
+}
+
+.sizeLabel {
+    @apply font-bold text-xl;
+}
+
+.sizeInput {
+    @apply bg-gray-200 p-2 w-full rounded hover:bg-white border mb-2 border-white hover:border hover:border-gray-200 focus:bg-white transition-all duration-300 ;
+}
+.button{
+    @apply bg-blue-700 text-white  p-2 rounded-md w-full hover:bg-blue-800 transition-all duration-300;
+}
+
+.disabledButton{
+    @apply bg-gray-400 text-white p-2 rounded-md;
+}
+
+
+
+
