@@ -6,15 +6,6 @@
     @apply transition-colors duration-200
 }
 
-/* Global dark mode styles */
-.dark button {
-    @apply dark:bg-gray-700 hover:dark:bg-gray-500
-}
-
-.dark button:disabled {
-    @apply dark:bg-gray-500
-}
-
 .dark .background {
     @apply dark:bg-gray-900
 }
