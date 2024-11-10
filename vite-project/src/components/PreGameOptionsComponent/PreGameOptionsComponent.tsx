@@ -34,6 +34,8 @@ export default function PreGameOptionsComponent() {
         }
       }, [mySize]);
 
+      
+
   return (
     <div className={s.container}>
 
@@ -43,7 +45,7 @@ export default function PreGameOptionsComponent() {
         <input className={s.sizeInput} type="number" value={mySize} onChange={(e) => setMySize(parseInt(e.target.value))} />
       </div>
  
-      <button disabled={!mySize || mySize < 4} className={`button ${!mySize || mySize < 4 ? s.disabledButton : s.button}`} onClick={handleClickButton}>Generate Maze</button>
+      <button disabled={!mySize || mySize < 4} className={!mySize || mySize < 4 ? s.disabledButton : s.button} onClick={handleClickButton}>Generate Maze</button>
 
       </div>
   )

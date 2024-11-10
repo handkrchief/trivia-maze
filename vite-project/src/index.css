@@ -7,8 +7,12 @@
 }
 
 /* Global dark mode styles */
-.dark .button {
-    @apply dark:bg-gray-700
+.dark button {
+    @apply dark:bg-gray-700 hover:dark:bg-gray-500
+}
+
+.dark button:disabled {
+    @apply dark:bg-gray-500
 }
 
 .dark .background {
@@ -22,3 +26,4 @@
 .dark .size-text {
     @apply dark:text-gray-300
 }
+
