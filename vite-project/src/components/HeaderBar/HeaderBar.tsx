@@ -1,13 +1,9 @@
 import { useMazeContext } from '../../context/MazeContext';
+import { useThemeContext } from '../../context/ThemeContext';
 import s from './HeaderBar.module.css';
 
-type HeaderBarProps = {
-  toggleDarkMode: () => void; // Type for the function that toggles dark mode
-  darkMode: boolean;          // Type for the boolean darkMode state
-};
-
-export default function HeaderBar({toggleDarkMode, darkMode} : HeaderBarProps) {
-
+export default function HeaderBar() {
+  const {theme, toggleTheme} = useThemeContext();
   const {started, startOver} = useMazeContext();
 
   return (
@@ -17,11 +13,11 @@ export default function HeaderBar({toggleDarkMode, darkMode} : HeaderBarProps) {
         </span>
 
         <div className={s.buttonContainer}>
-          <button className={`button ${s.button}`} 
-          onClick={toggleDarkMode}>
-            {darkMode ? 'Light Mode' : 'Dark Mode'}
+          <button className={s.button} 
+          onClick={toggleTheme}>
+            {theme === "light" ? 'Light Mode' : 'Dark Mode'}
           </button>
-          <button disabled={!started} className={`button ${started ? s.button: s.disabledButton}`} onClick={startOver}>
+          <button disabled={!started} className={started ? s.button: s.disabledButton} onClick={startOver}>
             Start Over
           </button>
         </div>
