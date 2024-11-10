@@ -1,26 +1,11 @@
+import { useThemeContext } from "../../context/ThemeContext";
 import Room from "../../models/Room";
 import { useEffect, useState } from "react";
 
 export default function RoomCell({ room }: { room: Room }) {
   const entry = room.getTypeAsNumber() ? room.getTypeAsNumber() : "W";
 
-  const [isDarkMode, setIsDarkMode] = useState(document.documentElement.classList.contains("dark"));
-
-  useEffect(() => {
-    const handleDarkModeToggle = () => {
-      setIsDarkMode(document.documentElement.classList.contains("dark"));
-    };
-
-    // Create the observer and link it to handleDarkModeToggle
-    const observer = new MutationObserver(handleDarkModeToggle);
-
-    // Observe changes to the 'class' attribute of document.documentElement
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-
-    // Cleanup the observer on component unmount
-    return () => observer.disconnect();
-  }, []);
-
+  const {theme} = useThemeContext();
   const lightClassValueMap: Record<number | string, string> = {
     1: "bg-white",
     5: "bg-green-500",
@@ -39,7 +24,7 @@ export default function RoomCell({ room }: { room: Room }) {
     "W": "bg-gray-900",
   };
 
-  const classValueMap = isDarkMode ? darkClassValueMap : lightClassValueMap;
+  const classValueMap = theme === "dark" ? darkClassValueMap : lightClassValueMap;
 
   const valueMap: Record<number | string, string> = {
     1: "",
