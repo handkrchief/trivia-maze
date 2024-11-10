@@ -19,7 +19,7 @@
 }
 
 .disabledButton{
-    @apply bg-gray-400 text-white p-2 rounded-md  w-full;
+    @apply  text-white p-2 rounded-md  w-full bg-gray-400;
 }
 
 
