@@ -14,13 +14,6 @@
 .sizeInput {
     @apply bg-gray-200 p-2 w-full rounded hover:bg-white border mb-2 border-white hover:border hover:border-gray-200 focus:bg-white transition-all duration-300 ;
 }
-.button{
-    @apply bg-purple-800 text-white  p-2 rounded-md w-full hover:bg-purple-700 transition-all duration-300;
-}
-
-.disabledButton{
-    @apply  text-white p-2 rounded-md  w-full bg-gray-400;
-}
 
 
 
