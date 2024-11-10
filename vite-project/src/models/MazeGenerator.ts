@@ -4,14 +4,15 @@
  * This class is responsible for handling logic related to generating a maze for the game.
  * The maze is generated using a recursive backtracking algorithm (Prim's algorithm).
  * 
- * @author Ethan Moore
- * @version 1.0
+ * @author Ethan Moore (handkrchief)
+ * @version November 11, 2024
 */
 export default class MazeGenerator{
 
 
 /**
- * Generates a maze of a given size
+ * Generates a maze of a given size sets the starting point to the beginning
+ * of the array, and sets the end point as the last explored space.
  * 
  * @param {number} theSize - The size of the maze
  * @returns {number[][]} - A 2D array representing the maze
@@ -24,7 +25,8 @@ public mazeGeneration(theSize:number):number[][]{
     let neighbors:number[][] = [];
     this.addNeighboringWalls({theRow:0, theCol:0, theNeighbors:neighbors, theSize});
 
-    
+    let myLastVisited = [0, 0];
+
     while(neighbors.length > 0){
         let randomNumber: number = Math.floor(Math.random() * neighbors.length);
         let myWall: number[] = neighbors[randomNumber];
@@ -36,10 +38,11 @@ public mazeGeneration(theSize:number):number[][]{
         if(this.canCarve({theMaze, theRow, theCol})){
             theMaze[theRow][theCol] = 1;
             this.addNeighboringWalls({theRow, theCol, theNeighbors:neighbors, theSize});
+            myLastVisited = [theRow, theCol];
         }
     }
     theMaze[0][0] = 5;
-    theMaze[theSize - 1][theSize - 1] = 9;
+    theMaze[myLastVisited[0]][myLastVisited[1]] = 9;
     this.generateBonus({theMaze, theSize});
     return theMaze;
 }
