@@ -4,12 +4,12 @@ export default function RoomCell({room}:{room:Room}) {
     const entry = room.getTypeAsNumber() ? room.getTypeAsNumber() : "W";
   
     const classValueMap: Record<number | string, string> = {
-        1:"bg-white",
+        1:"bg-gray-400",
         5:"bg-green-500",
         9:"bg-red-500",
         4:"bg-yellow-500",
         7:"bg-purple-600",
-        "W":"bg-black"
+        "W":"bg-gray-900"
     }
 
     const valueMap: Record<number | string, string> = {

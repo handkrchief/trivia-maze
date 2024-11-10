@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    @apply transition-colors duration-200
+}
+
+/* Global dark mode styles */
+.dark .button {
+    @apply dark:bg-gray-700
+}
+
+.dark .background {
+    @apply dark:bg-gray-900
+}
+
+.dark .header {
+    @apply dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300
+}
+
+.dark .size-text {
+    @apply dark:text-gray-300
+}

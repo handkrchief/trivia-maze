@@ -8,7 +8,7 @@ export default function GameComponent() {
     const {myMaze,  started} = useMazeContext();
 
   return (      
-    <div className={s.container}>
+    <div className={`background ${s.container}`}>
         {!started && <div className={s.preGameOptionsContainer}><PreGameOptionsComponent /></div>}
 
         {started && myMaze && <MazeComponent maze={myMaze.getMaze()} />}

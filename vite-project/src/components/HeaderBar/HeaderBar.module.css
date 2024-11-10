@@ -7,7 +7,7 @@
 }
 
 .buttonContainer{
-    @apply px-2 w-full flex justify-end items-center;
+    @apply px-2 w-full flex justify-end items-center gap-2;
 }
 
 .button{
@@ -17,4 +17,3 @@
 .disabledButton{
     @apply bg-gray-400 text-white p-2 rounded hover:bg-gray-400 transition-all duration-300;
 }
-
