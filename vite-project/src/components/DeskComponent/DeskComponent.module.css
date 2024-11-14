@@ -1,0 +1,50 @@
+
+/* container - we want this to be a component that sits in the background, meaning items overlap it*/
+.container {
+    @apply flex flex-col items-center justify-center w-full h-full;
+}
+
+.desk {
+    @apply w-[80%] h-[24vh] flex flex-col items-center;
+}
+
+.topTrim {
+    @apply w-full h-[1vh] bg-amber-950 rounded-t-lg;
+}
+
+.bottomTrim {
+    @apply w-[97%] h-[1vh] bg-amber-900 ;
+}
+
+.middle {
+    @apply w-[97%] h-[15vh] bg-gradient-to-b from-amber-900 to-amber-950 flex flex-row;
+}
+
+.base {
+    @apply w-[97%] h-[9vh] bg-amber-950 flex flex-row;
+}
+
+.leftLegContainer {
+    @apply w-full h-full flex justify-start items-start;
+}
+
+.rightLegContainer {
+    @apply w-full h-full flex justify-end items-end;
+}
+
+.leftLeg {
+    @apply w-[1vh] h-full bg-amber-950;
+}
+
+.rightLeg {
+    @apply w-[1vh] h-full bg-amber-950;
+}
+
+.lineContainer {
+    @apply w-full h-full flex justify-center items-center;
+}
+
+.line {
+    @apply w-[1px] h-[90%] bg-amber-950;
+}
+
