@@ -1,6 +1,14 @@
 import Item from "./Item";
 import Room from "./Room";
 
+
+/**
+ * Represents a player in the game
+ * 
+ * @author Zach Sanchez (Zachs00)
+ * @version 11/13/2024
+ */
+
 export default class Player {
     
     /**
