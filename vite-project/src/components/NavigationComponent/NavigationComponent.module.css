@@ -1,5 +1,5 @@
 .container{
-    @apply flex flex-col items-center justify-center p-4 w-full; 
+    @apply flex flex-col items-center justify-center p-4 w-full absolute bottom-[2vh]; 
 }
 
 .buttonsContainer{
@@ -26,7 +26,7 @@
     @apply bg-gray-200  rounded-full flex flex-row h-full border;
 }
 
-.rightCircleContainer{
+.rightCircleContainer{  
     @apply bg-gray-300 p-6 rounded-full flex flex-row;
 }
 
