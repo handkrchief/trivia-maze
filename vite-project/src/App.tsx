@@ -4,18 +4,20 @@ import { MazeContextProvider } from "./context/MazeContext"
 import './index.css'
 import { ThemeContextProvider } from "./context/ThemeContext";
 import Layout from "./components/Layout/Layout";
+import { PlayerProvider } from "./context/PlayerContext";
 
 function App() {
-  
   return (
-    <ThemeContextProvider>
-       <MazeContextProvider>
-        <Layout>
-          <HeaderBar />
-          <GameComponent />
-        </Layout>
-      </MazeContextProvider>
-    </ThemeContextProvider>
+    <PlayerProvider>
+      <ThemeContextProvider>
+        <MazeContextProvider>
+          <Layout>
+            <HeaderBar />
+            <GameComponent />
+          </Layout>
+        </MazeContextProvider>
+      </ThemeContextProvider>
+    </PlayerProvider>
   )
 }
 

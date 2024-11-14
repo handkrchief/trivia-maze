@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import s from './NavigationComponent.module.css';
 import { useMazeContext } from '../../context/MazeContext';
 import Room from '../../models/Room';
+import { usePlayerContext } from '../../context/PlayerContext';
+import Item from '../../models/Item';
 export default function NavigationComponent() {
-
+    const {player} = usePlayerContext();
     const {currentRoom, setCurrentRoom, myMaze, startOver} = useMazeContext();
     const [directions, setDirections] = useState({
         north: false,
@@ -23,10 +25,18 @@ export default function NavigationComponent() {
                     currentRoom.setTypeAsNumber(1);
                     alert("You found the exit!");
                     startOver();
+                    return;
                 }
+                const item:Item | undefined = theRoom.getItem();
+                if(item){
+                    player.addItem(item);
+                    theRoom.removeItem();
+                    alert("You found an item!");
+                }
+                player.setRoom(theRoom);
+
                 theRoom.setTypeAsNumber(7);
-                currentRoom.setTypeAsNumber(1);
-                    
+                currentRoom.setTypeAsNumber(1);                   
             }
         }
     }
