@@ -36,7 +36,7 @@ export default function RoomCell({ room }: { room: Room }) {
   };
 
   return (
-    <div className={`border flex items-center justify-center ${classValueMap[entry]} h-[4rem] w-[4rem]`}>
+    <div className={`border flex items-center justify-center ${classValueMap[entry]} h-[6vh] w-[6vh]`}>
       {room.getTypeAsNumber() ? valueMap[room.getTypeAsNumber()] : ""}
     </div>
   );

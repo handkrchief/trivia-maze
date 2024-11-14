@@ -1,0 +1,73 @@
+.tvContainer{
+    @apply w-full h-full flex flex-col items-center justify-center ;
+}
+
+.mazeContainer{
+    @apply w-full h-full;
+}
+
+.outerContainer{
+    @apply h-full p-6 bg-gradient-to-b from-[#73628A] to-[#5d4c74] border border-gray-500 rounded-2xl flex flex-row items-center ;
+}
+
+.innerContainer{
+    @apply h-full px-6 py-4 rounded-3xl;
+}
+
+.innerInnerContainer{
+    @apply h-full w-full  rounded-lg;
+}
+
+.rightContainer{
+    @apply flex flex-col w-full h-full pl-4  ;
+}   
+
+.verticalKnobs{
+    @apply flex flex-col items-center justify-center w-full h-full p-2 gap-4;
+}
+
+.horizontalKnobs{
+    @apply flex flex-row items-center justify-center w-full h-full gap-2 pt-4;
+}
+
+.tick{
+    @apply w-[5px] h-[1rem] -rotate-45 mt-1.5 ml-2.5 bg-black border-2 border-white;
+}
+
+.largeCircleKnobOuter{
+    @apply w-[5rem] h-[5rem] rounded-full bg-black;
+}
+
+.largeCircleKnob{
+    @apply w-full h-full bg-gradient-to-b from-amber-50 via-amber-100 to-amber-200 rounded-full shadow-xl;
+}
+
+.smallCircleButtonOuter{
+    @apply w-[2rem] h-[2rem] p-[1px] rounded-full bg-black;
+}
+
+.powerButton{
+    @apply w-full h-full rounded-full bg-gradient-to-b mt-[2px] mr-[2px] from-red-700 via-red-800 to-red-800;
+}
+
+.sourceButton{
+    @apply w-full h-full rounded-full bg-gradient-to-b mt-[2px] mr-[2px] from-green-700 via-green-800 to-green-800;
+}
+
+.antenna{
+    @apply w-full h-full flex flex-row justify-center items-end ;
+}
+
+.antennaLeft{
+    @apply w-[0.5rem] h-[7rem] bg-gray-700 rounded-full -rotate-45 outline outline-1 outline-gray-500;
+}   
+
+.antennaRight{
+    @apply w-[0.5rem] h-[7rem] bg-gray-700 outline outline-1 outline-gray-500 rounded-full rotate-45;
+}
+
+.antennaCenter{
+    @apply w-[4rem] h-[1.5rem] bg-gray-500 rounded-t-full outline outline-1 outline-gray-500;
+}
+
+

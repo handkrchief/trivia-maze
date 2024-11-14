@@ -249,4 +249,11 @@ export default class Room {
         return this.myItem !== undefined;
     }
 
+    /**
+     * Removes the item from the room
+     */
+    public removeItem(){
+        this.myItem = undefined;
+    }
+
 }
