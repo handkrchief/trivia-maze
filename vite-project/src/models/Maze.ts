@@ -7,6 +7,7 @@ import Room from "./Room";
  *
  * @author Ethan Moore
  * @author Zach Sanchez
+ * @author Caleb Carroll
  * @version 1.0
  */
 export default class Maze {
