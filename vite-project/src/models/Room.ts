@@ -8,6 +8,7 @@ import Question from "./Question";
  *
  * @author Zach Sanchez
  * @author Ethan Moore
+ * @author Caleb Carroll
  * @version 1.0
  */
 export default class Room {
@@ -164,7 +165,7 @@ export default class Room {
    */
   public generateItem() {
     //A random integer which represents an Item type.
-    const itemType = Math.floor(Math.random() * 2);
+    const itemType = Math.floor(Math.random() * 3);
     //A switch that returns the item type.
     switch (itemType) {
       case 0:
@@ -172,6 +173,9 @@ export default class Room {
         break;
       case 1:
         this.setItem(new Item("Phone-A-Friend"));
+        break;
+      case 2:
+        this.setItem(new Item("Free-Guess"));
         break;
     }
   }
