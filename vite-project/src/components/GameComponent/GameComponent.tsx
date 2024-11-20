@@ -5,17 +5,20 @@ import MazeComponent from '../MazeComponent/MazeComponent';
 import NavigationComponent from '../NavigationComponent/NavigationComponent';
 import TvComponent from '../TvComponent/TvComponent';
 import DeskComponent from '../DeskComponent/DeskComponent';
+import QuestionAnswerComponent from '../QuestionAnswerComponent/QuestionAnswerComponent';
 
 export default function GameComponent() {
-    const {myMaze,  started} = useMazeContext();
+    const {myMaze,isAnsweringQuestions,  started} = useMazeContext();
     
+
   return (      
     <div className={`background ${s.container}`}>
         {!started && <div className={s.preGameOptionsContainer}><PreGameOptionsComponent /></div>}
 
-        {started && myMaze && <TvComponent />}
-        {started && myMaze && <DeskComponent/>}
-        {started && <NavigationComponent />}
+        {started && myMaze && !isAnsweringQuestions && <TvComponent />}
+        {started && myMaze && !isAnsweringQuestions && <DeskComponent/>}
+        {started && !isAnsweringQuestions && <NavigationComponent />}
+        {isAnsweringQuestions && <QuestionAnswerComponent/>}
     </div>
   )
 }
