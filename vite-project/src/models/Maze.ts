@@ -1,6 +1,5 @@
 import Room from "./Room";
 
-
 /**
  * Maze class
  * 
@@ -118,6 +117,23 @@ export default class Maze{
     /**
      * Print the maze to the console
     */
+
+    /**
+     * Sets the maze. useful for updating, and probably useful for our save system
+     * 
+     * @param {Maze} - The Maze
+    */
+    public setMaze(theMaze: Maze):void{
+        if(theMaze){
+            this.myRooms = theMaze.getMaze();
+        }
+    }
+
+    public setRoom({theRow, theCol, theRoom}:{theRow:number, theCol:number, theRoom:Room}){
+        if(theRow && theCol && this.myRooms[theRow][theCol]){
+            this.myRooms[theRow][theCol] = theRoom
+        }
+    }
     public printMaze(){
         console.log("+" + "-".repeat(this.myRooms[0].length ) + "+");
         for(let i = 0; i < this.myRooms.length; i++){
