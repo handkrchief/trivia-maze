@@ -5,31 +5,40 @@ import { useMazeContext } from "../../context/MazeContext";
 import { useEffect } from "react";
 import { lightThemeColors, darkThemeColors } from "../../ThemeColors";
 import { useThemeContext } from "../../context/ThemeContext";
+import { QuestionsThemes } from "../../types/QuestionTypes";
+import Room from "../../models/Room";
 
 export default function PreGameOptionsComponent() {
 
-    const {mySize, setMySize, setMyMazeAsNumbers, setLoading, setStarted, setCurrentRoom, setMyMaze} = useMazeContext();
+    const {mySize, setMySize, setMyMazeAsNumbers, setLoading, setStarted, setMyCurrentRoom, setMyMaze, initializeQuestionsFromDB
+          , setQuestionsInRooms} = useMazeContext();
     const {theme} = useThemeContext();
     const themeColors = theme === "light" ? lightThemeColors : darkThemeColors;
 
     const handleClickButton = async() => {
-        try { 
+        try {
+          const chosenThemeAsTest: QuestionsThemes = "Test"
+          initializeQuestionsFromDB(chosenThemeAsTest, mySize);
           const myMazeGenerator:MazeGenerator = new MazeGenerator();
           const myMazeAsNumbers:number[][] = myMazeGenerator.mazeGeneration(mySize);
-          const myMaze:Maze = new Maze(myMazeAsNumbers);
+          let myCurrMaze:Maze = new Maze(myMazeAsNumbers);
+          myCurrMaze = setQuestionsInRooms(myCurrMaze)
           setMyMazeAsNumbers(myMazeAsNumbers);
           setStarted(true);
-          setMyMaze(myMaze);
-          myMaze.printMaze();
-          setCurrentRoom(myMaze.getStartingRoom());
+          setMyMaze(myCurrMaze);
+          setMyCurrentRoom(myCurrMaze.getStartingRoom());
+          
+
         } catch (error) {
           console.error(error);
         } finally {
           setLoading(false);
+
         }
       }
     
     
+
     
       useEffect(() => {
         if(mySize && mySize > 7){
