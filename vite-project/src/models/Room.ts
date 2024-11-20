@@ -157,6 +157,7 @@ export default class Room {
     public setItem(item:Item){
         if(item !== null){
             this.myItem = item;
+            return;
         }
         throw new Error("Item cannot be null");
     }
@@ -169,6 +170,7 @@ export default class Room {
     public setQuestion(question:Question){
         if(question !== null){
             this.myQuestion = question;
+            return;
         }
         throw new Error("Question cannot be null");
     }
@@ -176,6 +178,7 @@ export default class Room {
     public setRow(row:number){
         if(row !== null){
             this.myRow = row;
+            return;
         }
         throw new Error("Row cannot be null");
     }
@@ -183,6 +186,7 @@ export default class Room {
     public setCol(col:number){
         if(col !== null){
             this.myCol = col;
+            return;
         }
         throw new Error("Column cannot be null");
     }   
@@ -195,6 +199,7 @@ export default class Room {
     public setIsAnswered(answeredStatus:boolean){
         if(answeredStatus !== null){
             this.isAnswered = answeredStatus;
+            
         }
     }
 
