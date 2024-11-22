@@ -1,0 +1,42 @@
+.container{
+    @apply w-full h-full flex flex-col justify-center items-center p-8;
+}
+
+.questionContainer{
+    @apply w-full h-full flex justify-center items-center flex-col rounded border py-4 mb-4 bg-gray-200;
+}
+
+.questionText{
+    @apply text-2xl font-bold tracking-tight ;
+}
+
+.questionComponentContainer{
+    @apply w-full h-full flex flex-col justify-center items-center;
+}
+
+.answersComponentContainer{
+    @apply w-full h-full flex flex-col justify-center items-center;
+}
+
+.answersContainer{
+    @apply w-full h-full flex flex-col justify-center items-center
+    font-semibold tracking-tight;
+}
+
+.answerContainer{
+    @apply w-full h-full flex justify-center items-center border rounded-md p-4 ;
+}
+
+
+.choicesContainer{
+    @apply w-full h-full grid grid-cols-2 gap-4 ;
+}
+
+
+.buttonContainer{
+    @apply w-full h-full flex justify-center items-center py-4;
+}
+
+.submitButton{
+    @apply  w-1/4 py-4  ;
+}

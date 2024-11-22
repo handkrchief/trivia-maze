@@ -1,0 +1,44 @@
+{
+    "Test":{
+        "questions": {
+            "1": {
+                "questionText":"What's the answer to: 1+1?",
+                "correctAnswer":"The answer is 2.",
+                "choices":[
+                    "The answer is 2.",
+                    "I think it's actually 4.",
+                    "Idk.",
+                    "Simple Arithmetic, its 11 for sure."
+                ]
+            }
+        }
+    },
+    "Math":{
+        "questions": {
+            "1": {
+                "questionText":"What's the answer to: 1+1?",
+                "correctAnswer":"The answer is 2.",
+                "choices":[
+                    "The answer is 2.",
+                    "I think it's actually 4.",
+                    "Idk.",
+                    "Simple Arithmetic, its 11 for sure."
+                ]
+            }
+        }
+    },
+    "Example": {
+        "questions": {
+            "1": {
+                "questionText":"What's the answer to: 1+1?",
+                "correctAnswer":"The answer is 2.",
+                "choices":[
+                    "The answer is 2.",
+                    "I think it's actually 4.",
+                    "Idk.",
+                    "Simple Arithmetic, its 11 for sure."
+                ]
+            }
+        }
+    }
+}

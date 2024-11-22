@@ -6,7 +6,7 @@ import { usePlayerContext } from '../../context/PlayerContext';
 import Item from '../../models/Item';
 export default function NavigationComponent() {
     const {player} = usePlayerContext();
-    const {currentRoom, setCurrentRoom, myMaze, startOver} = useMazeContext();
+    const {myCurrentRoom, setMyCurrentRoom, myMaze, startOver, setIsAnsweringQuestions,setMyCurrentQuestion} = useMazeContext();
     const [directions, setDirections] = useState({
         north: false,
         south: false,
@@ -15,14 +15,24 @@ export default function NavigationComponent() {
       });
 
     const changeRoom = (direction:string) => {
-        if(currentRoom && myMaze){
-            const theRoom:Room | null = myMaze.getAdjacentRoom({currentRoom: currentRoom, direction: direction});
+        if(myCurrentRoom && myMaze){
+            const theRoom:Room | null = myMaze.getAdjacentRoom({currentRoom: myCurrentRoom, direction: direction});
             if(theRoom){
-                setCurrentRoom(theRoom);
+                const q = theRoom.getQuestion()
+                if(!theRoom.getIsAnswered() && q ){
+                    setIsAnsweringQuestions(true);
+                    setMyCurrentQuestion(q); 
+                    return
+                }
+
+
+
+
+                setMyCurrentRoom(theRoom);
                 if(theRoom.getTypeAsNumber() === 9){
                    
                     theRoom.setTypeAsNumber(7);
-                    currentRoom.setTypeAsNumber(1);
+                    myCurrentRoom.setTypeAsNumber(1);
                     alert("You found the exit!");
                     startOver();
                     return;
@@ -36,7 +46,7 @@ export default function NavigationComponent() {
                 player.setRoom(theRoom);
 
                 theRoom.setTypeAsNumber(7);
-                currentRoom.setTypeAsNumber(1);                   
+                myCurrentRoom.setTypeAsNumber(1);                   
             }
         }
     }
@@ -51,8 +61,8 @@ export default function NavigationComponent() {
     const updateNavigation = () => {
        const directionsArray:string[] = ["north", "west","south", "east"];
        for(const direction of directionsArray){
-        if (currentRoom && myMaze) {
-            const theRoom:Room | null = myMaze.getAdjacentRoom({currentRoom: currentRoom, direction: direction});
+        if (myCurrentRoom && myMaze) {
+            const theRoom:Room | null = myMaze.getAdjacentRoom({currentRoom: myCurrentRoom, direction: direction});
             if(!(theRoom?.getIsOpen()) || (theRoom.getIsLocked())){
                 setDirectionState(direction, false);
             } else {
@@ -64,7 +74,7 @@ export default function NavigationComponent() {
 
     useEffect(() => {
         updateNavigation();
-    }, [currentRoom, myMaze]);
+    }, [myCurrentRoom, myMaze]);
 
   return (
     <div className={s.container}>
