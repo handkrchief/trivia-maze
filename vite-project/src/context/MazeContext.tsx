@@ -29,6 +29,7 @@ export interface MazeContextType {
   myPowerUp: string;
   myCurrentRoom: Room | null;
   myCurrentQuestion: Question | null;
+  myRoomToNavigateTo: Room | null;
   started: boolean;
   loading: boolean;
   isAnsweringQuestions: boolean;
@@ -47,6 +48,7 @@ export interface MazeContextType {
   setStarted: React.Dispatch<React.SetStateAction<boolean>>;
   setMyCurrentRoom: React.Dispatch<React.SetStateAction<Room | null>>;
   setMyCurrentQuestion: React.Dispatch<React.SetStateAction<Question | null>>;
+  setMyRoomToNavigateTo: React.Dispatch<React.SetStateAction<Room | null>>;
   setMyQuestions: React.Dispatch<React.SetStateAction<Question[] | null>>;
   setIsCorrect: React.Dispatch<React.SetStateAction<boolean | null>>;
 }
@@ -114,12 +116,25 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
   const [myQuestions, setMyQuestions] = useState<Question[] | null> ([])
   const [isAnsweringQuestions, setIsAnsweringQuestions] = useState<boolean>(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const startOver = () => {
+  const [myRoomToNavigateTo, setMyRoomToNavigateTo] = useState<Room | null>(null);
+
+  /**
+   * Resets all the states to their default values.
+   * 
+   * @returns void
+  */
+  const startOver = ():void => {
     setMyMazeAsNumbers([]);
     setMyMaze(null);
     setLoading(true);
     setStarted(false);
     setMyCurrentQuestion(null);
+    setMyQuestions([]);
+    setIsAnsweringQuestions(false);
+    setIsCorrect(null);
+    setMyRoomToNavigateTo(null);
+    setMyCurrentRoom(null);
+    setMyPowerUp("");
   }
 
   const addQuestion = (question:Question) : void =>{
@@ -136,6 +151,14 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     }
     return res
   }
+
+
+  /**
+   * Sets the questions in the rooms of the maze.
+   * 
+   * @param theMaze - The maze to set the questions in.
+   * @returns The maze with the questions in the rooms.
+  */
   const setQuestionsInRooms=  (theMaze:Maze):Maze =>{
     //place holder method (no db conn yet)
 
@@ -161,16 +184,30 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     return theMaze;    
   }
 
+  /**
+   * Sets the question in the room.
+   * 
+   * @param theRoom - The room to set the question in.
+   * @param count - The index of the question to set.
+   * @returns The room with the question in it.
+  */
   const setQuestionInRoom =  (theRoom: Room, count:number): Room | null =>{
       
     if(myQuestions){
         let currQuestion = myQuestions[count];
-        console.log(currQuestion)
         theRoom.setQuestion(currQuestion);
         return theRoom;
       } 
       return null;
   }
+
+  /**
+   * Initializes the questions from sample data for now, can be changed for db conn.
+   * 
+   * @param theme - The theme of the questions to set.
+   * @param size - The size of the maze.
+   * @returns void
+  */
   const initializeQuestionsFromDB = async (theme:QuestionsThemes, size:number) =>{
     if(theme == "Test"){
       let i;
@@ -196,7 +233,9 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     myPowerUp,
     myCurrentQuestion,
     myCurrentRoom,
+    myRoomToNavigateTo,
     isAnsweringQuestions,
+    isCorrect,
     started,
     loading,
     myQuestions,
@@ -205,6 +244,7 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     setIsAnsweringQuestions,
     setQuestionsInRooms,
     setQuestionInRoom,
+    setMyRoomToNavigateTo,
     setMyQuestions,
     setMyMazeAsNumbers,
     setMyMaze,
