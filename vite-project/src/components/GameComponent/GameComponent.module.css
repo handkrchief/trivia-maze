@@ -1,36 +1,7 @@
 .container {
-    @apply w-full h-full min-h-screen flex flex-col justify-center items-center p-2;
+    @apply w-full  h-full min-h-screen flex flex-col md:justify-center items-center p-2;
 }
 
-.button {
-    @apply bg-blue-500 text-white rounded-md w-full py-2 ;
+.componentContainer {
+    @apply w-full md:w-[80%] lg:w-[70%] xl:w-[60%] 2xl:w-[50%] h-full flex flex-col justify-center items-center;
 }
-
-.disabledButton {
-    @apply bg-gray-200 text-white rounded-md w-full py-2 ;
-}
-
-.mazeContainer {
-    @apply w-full h-full min-h-screen flex flex-col justify-center items-center ;
-}
-
-.sizeContainer {
-    @apply w-full flex flex-col justify-center pb-2;
-}
-
-.sizeLabel {
-    @apply font-bold;
-}
-
-.sizeInput {
-    @apply bg-gray-200 p-2 w-full rounded hover:bg-white focus:bg-white transition-all duration-300 ;
-}
-
-.topContainer {
-    @apply w-[20%] h-full flex flex-col justify-center items-center;
-}
-
-.preGameOptionsContainer {
-    @apply w-full max-w-[300px] h-full flex flex-col justify-center items-center;
-}
-
