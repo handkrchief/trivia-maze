@@ -1,6 +1,12 @@
 import s from './DeskComponent.module.css'
 
-// this is be a desk for the tv to sit on. we ideally want to make this a component that sits in the background, meaning items overlap it.
+/**
+ * The DeskComponent component, displays the desk.
+ * 
+ * honestly working on clean theme to see what we prefer.
+ * @author Zach Sanchez (Zachs00)
+ * @version November 21st, 2024
+*/
 export default function DeskComponent() {
   return (
     <div className={s.container}>

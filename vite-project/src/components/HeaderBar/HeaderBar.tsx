@@ -4,8 +4,22 @@ import { useThemeContext } from '../../context/ThemeContext';
 import { lightThemeColors, darkThemeColors } from '../../ThemeColors';
 import s from './HeaderBar.module.css';
 
+/**
+ * The HeaderBar component, displays the header bar.
+ * 
+ * @author Zach Sanchez (Zachs00)
+ * @version November 21st, 2024
+*/
 export default function HeaderBar() {
+
+  /**
+   * The theme for the header bar.
+   */
   const {theme, toggleTheme} = useThemeContext();
+
+  /**
+   * The started state for the maze.
+   */
   const {started, startOver} = useMazeContext();
   const themeColors = theme === "light" ? lightThemeColors : darkThemeColors;
 
