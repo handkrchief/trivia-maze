@@ -18,19 +18,15 @@ A trivia-based maze game where players navigate through a maze by answering ques
    ```bash
    git clone https://github.com/your-username/trivia-maze.git
    ```
-2. Navigate to the project folder:
-   ```bash
-   cd trivia-maze
-   ```
-3. Install dependencies:
+2. Install dependencies:
    ```bash
    npm install
    ```
-4. Start the development server:
+3. Start the development server:
    ```bash
    npm run dev
    ```
-5. Open the app in your browser at http://localhost:5173.
+4. Open the app in your browser at http://localhost:5173.
 
 ---
 
@@ -70,7 +66,7 @@ The original implementation of this project was written in Java. These files hav
 ## Roadmap
 
 1. Complete Save States: Allow players to save and load their progress.
-2. Implement Trivia Questions: Add the trivia functionality to unlock maze doors.
+2. Fetch Questions from Database: Random questions are fetched from the generated local database and used within the game.
 
 ---
 
