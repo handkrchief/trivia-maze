@@ -4,13 +4,35 @@ import { useMazeContext } from '../../context/MazeContext';
 import { useThemeContext } from '../../context/ThemeContext';
 import { useState } from 'react';
 
+/**
+ * The TV component, displays the maze and the tv controls.
+ * 
+ * @author Zach Sanchez (zachs00)
+ * @version November 15th, 2024
+ */
+
 export default function TvComponent() {
+  /**
+   * The theme colors for the TV component.
+   */
     const {themeColors} = useThemeContext();
+    /**
+     * The maze for the TV component.
+     */
     const {myMaze} = useMazeContext();
 
+    /**
+     * The state for TV on/off status.
+     */
     const [isTvOn, setIsTvOn] = useState(true);
+    /**
+     * The state for TV being upside down.
+     */
     const [isUpsideDown, setIsUpsideDown] = useState(false);
 
+    /**
+     * The style for the inner container.
+     */
    const innerContainerStyle = !isTvOn ? 'bg-black transition-all duration-300' : ` ${themeColors.background} transition-all duration-300`;
     
   return (

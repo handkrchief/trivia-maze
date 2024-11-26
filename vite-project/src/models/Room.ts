@@ -140,6 +140,7 @@ export default class Room {
     return this.isAnswered;
   }
 
+ Add-Items-During-Gen
   /**
    * Gets the type of the room as a number
    *
@@ -188,6 +189,60 @@ export default class Room {
   public setQuestion(question: Question) {
     if (question !== null) {
       this.myQuestion = question;
+=======
+    /**
+     * Sets the item in the room
+     * 
+     * @param {Item} item - The item to set
+     */
+    public setItem(item:Item){
+        if(item !== null){
+            this.myItem = item;
+            return;
+        }
+        throw new Error("Item cannot be null");
+    }
+    
+    /**
+     * Sets the question in the room
+     * 
+     * @param {Question} question - The question to set
+     */
+    public setQuestion(question:Question){
+        if(question !== null){
+            this.myQuestion = question;
+            return;
+        }
+        throw new Error("Question cannot be null");
+    }
+
+    public setRow(row:number){
+        if(row !== null){
+            this.myRow = row;
+            return;
+        }
+        throw new Error("Row cannot be null");
+    }
+
+    public setCol(col:number){
+        if(col !== null){
+            this.myCol = col;
+            return;
+        }
+        throw new Error("Column cannot be null");
+    }   
+
+    /**
+     * Sets whether the room is answered
+     * 
+     * @param {boolean} answeredStatus - Whether the room is answered
+     */
+    public setIsAnswered(answeredStatus:boolean){
+        if(answeredStatus !== null){
+            this.isAnswered = answeredStatus;
+            
+        }
+ main
     }
     throw new Error("Question cannot be null");
   }

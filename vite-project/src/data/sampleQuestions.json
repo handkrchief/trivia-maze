@@ -1,0 +1,44 @@
+{
+    "Test":{
+        "questions": {
+            "1": {
+                "questionText":"We want to know: According to basic mathmatics, what's the answer to 1+1?",
+                "correctAnswer":"The answer is 2.",
+                "choices":[
+                    "The answer is 2.",
+                    "I think it's actually 4.",
+                    "Lorem ipsum dolor sit amet consectetur adipisicing elit. with 1000 words for testing lmao this is a long question that we need to check necessarily for the conditional probability?",
+                    "Simple Arithmetic, its 11 for sure."
+                ]
+            }
+        }
+    },
+    "Math":{
+        "questions": {
+            "1": {
+                "questionText":"What's the answer to: 1+1?",
+                "correctAnswer":"The answer is 2.",
+                "choices":[
+                    "The answer is 2.",
+                    "I think it's actually 4.",
+                    "Idk.",
+                    "Simple Arithmetic, its 11 for sure."
+                ]
+            }
+        }
+    },
+    "Example": {
+        "questions": {
+            "1": {
+                "questionText":"What's the answer to: 1+1?",
+                "correctAnswer":"The answer is 2.",
+                "choices":[
+                    "The answer is 2.",
+                    "I think it's actually 4.",
+                    "Idk.",
+                    "Simple Arithmetic, its 11 for sure."
+                ]
+            }
+        }
+    }
+}

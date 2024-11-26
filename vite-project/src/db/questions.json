@@ -1,0 +1,25 @@
+[
+    {
+      "question_text": "What is the capital of France?",
+      "correct_answer": "Paris",
+      "category": "geography",
+      "type": "multiple_choice",
+      "choices": [
+        { "choice_text": "Paris", "is_correct": 1 },
+        { "choice_text": "London", "is_correct": 0 },
+        { "choice_text": "Berlin", "is_correct": 0 },
+        { "choice_text": "Madrid", "is_correct": 0 }
+      ]
+    },
+    {
+      "question_text": "Is the Earth flat?",
+      "correct_answer": "No",
+      "category": "science",
+      "type": "true_false",
+      "choices": [
+        { "choice_text": "Yes", "is_correct": 0 },
+        { "choice_text": "No", "is_correct": 1 }
+      ]
+    }
+  ]
+  

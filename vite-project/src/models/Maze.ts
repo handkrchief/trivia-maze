@@ -113,7 +113,52 @@ export default class Maze {
       default:
         return null;
     }
+ Add-Items-During-Gen
   }
+
+    /**
+     * Print the maze to the console
+    */
+
+    /**
+     * Sets the maze. useful for updating, and probably useful for our save system
+     * 
+     * @param {Maze} - The Maze
+    */
+    public setMaze(theMaze: Maze):void{
+        if(theMaze){
+            this.myRooms = theMaze.getMaze();
+        }
+    }
+
+    public setRoom({theRow, theCol, theRoom}:{theRow:number, theCol:number, theRoom:Room}){
+        if(theRow && theCol && this.myRooms[theRow][theCol]){
+            this.myRooms[theRow][theCol] = theRoom
+        }
+    }
+    public printMaze(){
+        console.log("+" + "-".repeat(this.myRooms[0].length ) + "+");
+        for(let i = 0; i < this.myRooms.length; i++){
+            let theRow:string = "|";
+            for(let j = 0; j < this.myRooms[i].length; j++){
+                let theRoom:Room = this.myRooms[i][j];
+                if(theRoom.getIsItemRoom()){
+                    theRow += "I";
+                }else if(theRoom.getIsLocked()){
+                    theRow += "L";
+                }else if(theRoom === this.myStartingRoom){
+                    theRow += "S";
+                }else if(theRoom === this.myExitRoom){
+                    theRow += "E";
+                
+                }else if(theRoom.getIsOpen()){
+                    theRow += ".";
+                } else {
+                    theRow += "#";
+                }
+            }
+            console.log(theRow + "|");
+ main
 
   /**
    * Get the maze

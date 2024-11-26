@@ -5,32 +5,66 @@ import { useMazeContext } from "../../context/MazeContext";
 import { useEffect } from "react";
 import { lightThemeColors, darkThemeColors } from "../../ThemeColors";
 import { useThemeContext } from "../../context/ThemeContext";
+import { QuestionsThemes } from "../../types/QuestionTypes";
+import Room from "../../models/Room";
 
+/**
+ * The PreGameOptionsComponent component, displays the pre-game options.
+ * 
+ * @author Zach Sanchez (zachs00)
+ * @version November 21st, 2024
+ */
 export default function PreGameOptionsComponent() {
 
-    const {mySize, setMySize, setMyMazeAsNumbers, setLoading, setStarted, setCurrentRoom, setMyMaze} = useMazeContext();
+    const {mySize, setMySize, setMyMazeAsNumbers, setLoading, setStarted, setMyCurrentRoom, setMyMaze, initializeQuestionsFromDB
+          , setQuestionsInRooms} = useMazeContext();
+
+    /**
+     * The theme and theme colors for the PreGameOptionsComponent.
+     */
     const {theme} = useThemeContext();
+    /**
+     * The theme colors for the PreGameOptionsComponent.
+     */
     const themeColors = theme === "light" ? lightThemeColors : darkThemeColors;
 
-    const handleClickButton = async() => {
-        try { 
+    /**
+     * The function to handle the button click.
+     * Uses the size provided to generate a maze, and then sets the maze,
+     * current room, and started state.
+     * 
+     * @returns Promise<void>
+     */
+    const handleClickButton = async(): Promise<void> => {
+        try {
+          const chosenThemeAsTest: QuestionsThemes = "Test"
+          initializeQuestionsFromDB(chosenThemeAsTest, mySize);
           const myMazeGenerator:MazeGenerator = new MazeGenerator();
           const myMazeAsNumbers:number[][] = myMazeGenerator.mazeGeneration(mySize);
-          const myMaze:Maze = new Maze(myMazeAsNumbers);
+          let myCurrMaze:Maze = new Maze(myMazeAsNumbers);
+          myCurrMaze = setQuestionsInRooms(myCurrMaze)
           setMyMazeAsNumbers(myMazeAsNumbers);
           setStarted(true);
-          setMyMaze(myMaze);
-          myMaze.printMaze();
-          setCurrentRoom(myMaze.getStartingRoom());
+          setMyMaze(myCurrMaze);
+          setMyCurrentRoom(myCurrMaze.getStartingRoom());
+          
+
         } catch (error) {
           console.error(error);
         } finally {
           setLoading(false);
+
         }
       }
     
     
-    
+
+    /**
+     * The useEffect to check if the size is greater than 7, and if so,
+     * it alerts the user and sets the size to 7.
+     * 
+     * this will run when mySize changes.
+     */
       useEffect(() => {
         if(mySize && mySize > 7){
           alert("Size must be less than or equal to 7");
