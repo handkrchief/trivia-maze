@@ -13,7 +13,7 @@ export default function Layout({children} : {children: React.ReactNode}) {
     /**
      * The theme for the layout.
      */
-    const {theme} = useThemeContext();
+    const {theme, themeColors} = useThemeContext();
 
 
     /**
@@ -26,7 +26,7 @@ export default function Layout({children} : {children: React.ReactNode}) {
     }, [theme]);
 
     return (
-        <div className={`${s.container} ${theme === "dark" ? s.dark : ""}`}>
+        <div className={`${s.container} ${theme === "dark" ? s.dark : ""}  ${themeColors.background}`}>
             {children}
         </div>
     )
