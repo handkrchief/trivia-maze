@@ -28,6 +28,7 @@ A trivia-based maze game where players navigate through a maze by answering ques
    ```
 4. Open the app in your browser at http://localhost:5173.
 
+
 ---
 
 ## Database Setup
