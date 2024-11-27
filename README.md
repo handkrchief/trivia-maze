@@ -18,19 +18,16 @@ A trivia-based maze game where players navigate through a maze by answering ques
    ```bash
    git clone https://github.com/your-username/trivia-maze.git
    ```
-2. Navigate to the vite-project folder:
-   ```bash
-   cd vite-project
-   ```
-3. Install dependencies:
+2. Install dependencies:
    ```bash
    npm install
    ```
-4. Start the development server:
+3. Start the development server:
    ```bash
    npm run dev
    ```
-5. Open the app in your browser at http://localhost:5173.
+4. Open the app in your browser at http://localhost:5173.
+
 
 ---
 
