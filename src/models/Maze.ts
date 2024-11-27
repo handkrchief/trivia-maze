@@ -29,33 +29,34 @@ export default class Maze{
     constructor(theMaze:number[][]){
         let theDimensions:number = theMaze.length;
         this.myRooms = [];
-        for(let i = 0; i < theDimensions; i++){
-            this.myRooms[i] = [];
-            for(let j = 0; j < theDimensions; j++){
-                this.myRooms[i][j] = new Room({theRow:i, theCol:j});
+        for(let row = 0; row < theDimensions; row++){
+            this.myRooms[row] = [];
+            for(let col = 0; col < theDimensions; col++){
+                this.myRooms[row][col] = new Room({ theRow: row, theCol: col });
             
-            switch(theMaze[i][j]){
-                case 5:
-                    this.myRooms[i][j].setTypeAsNumber(7);
-                    this.myStartingRoom = this.myRooms[i][j];
-                    this.myStartingRoom.setIsOpen(true);
-                    break;
-                case 9:
-                    this.myRooms[i][j].setTypeAsNumber(9);
-                    this.myExitRoom = this.myRooms[i][j];
-                    this.myExitRoom.setIsOpen(true);
-                    break;
-                case 1:
-                    this.myRooms[i][j].setTypeAsNumber(1);
-                    this.myRooms[i][j].setIsOpen(true);
-                    break;
-                case 4:
-                    this.myRooms[i][j].setTypeAsNumber(4);
-                    this.myRooms[i][j].setIsItemRoom(true);
-                    this.myRooms[i][j].setIsOpen(true);
-                    break;
-                default:
-                    break;
+            switch (theMaze[row][col]) {
+              case 5:
+                this.myRooms[row][col].setTypeAsNumber(7);
+                this.myStartingRoom = this.myRooms[row][col];
+                this.myStartingRoom.setIsOpen(true);
+                break;
+              case 9:
+                this.myRooms[row][col].setTypeAsNumber(9);
+                this.myExitRoom = this.myRooms[row][col];
+                this.myExitRoom.setIsOpen(true);
+                break;
+              case 1:
+                this.myRooms[row][col].setTypeAsNumber(1);
+                this.myRooms[row][col].setIsOpen(true);
+                break;
+              case 4:
+                this.myRooms[row][col].setTypeAsNumber(4);
+                this.myRooms[row][col].setIsItemRoom(true);
+                this.myRooms[row][col].setIsOpen(true);
+                this.myRooms[row][col].generateItem();
+                break;
+              default:
+                break;
             }
             }
         }
@@ -116,7 +117,7 @@ export default class Maze{
     }
     /**
      * Print the maze to the console
-    */
+     */
 
     /**
      * Sets the maze. useful for updating, and probably useful for our save system
