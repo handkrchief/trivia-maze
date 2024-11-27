@@ -1,3 +1,13 @@
+/**
+ * @file db-init.cjs
+ * @description This file is used to create the database tables for the trivia app.
+ * It creates two tables: questions and choices.
+ * The questions table stores the question text, correct answer, category, and type of question.
+ * The choices table stores the choices for each question, whether they are correct or not, and the question id.
+ * @version 1.0
+ * @author Ethan Moore
+ */
+
 const sqlite3 = require("sqlite3").verbose();
 const fs = require("fs");
 

@@ -1,3 +1,11 @@
+/**
+ * @file seed-data.cjs
+ * @description This file is used to seed the trivia database with questions and choices from an external JSON file.
+ * It reads the questions.json file, parses the data, and inserts the questions and choices into the database tables.
+ * @version 1.0
+ * @author Ethan Moore
+ */
+
 const sqlite3 = require("sqlite3").verbose();
 const fs = require("fs");
 
