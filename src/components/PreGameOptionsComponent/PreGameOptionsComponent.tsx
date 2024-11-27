@@ -75,7 +75,7 @@ export default function PreGameOptionsComponent() {
       
 
   return (
-    <div className={s.container}>
+    <div className={`${s.container} ${themeColors.primaryOutline} ${themeColors.formBackground}`}>
 
 
       <div className={s.sizeContainer}>

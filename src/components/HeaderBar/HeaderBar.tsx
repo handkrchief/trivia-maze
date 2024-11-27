@@ -25,7 +25,7 @@ export default function HeaderBar() {
 
 
   return (
-    <div className={`header ${s.container}`}>
+    <div className={`header ${s.container} ${themeColors.formBackground}`}>
         <span className={s.title}>
             Trivia Maze
         </span>

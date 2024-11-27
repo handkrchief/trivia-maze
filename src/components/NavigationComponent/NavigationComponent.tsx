@@ -129,21 +129,46 @@ export default function NavigationComponent() {
       <div className={s.outerCircleContainer}>
       <div className={s.leftOuterCircleContainer}>
       <div className={s.circleContainer}>
-      <div className={s.buttonsContainer}>
+      <div className={s.leftButtonsContainer}>
+
+        <div className={s.buttonContainer}>
         <button className={directions.north ? s.button : s.disabledButton} disabled={!directions.north} onClick={() => changeRoom("north")}>
-            
-        </button>
-        <div className={s.eastWestContainer}>
-            <button className={directions.west ? s.button : s.disabledButton} disabled={!directions.west} onClick={() => changeRoom("west")}>
-         
-            </button>
-            <button className={directions.east ? s.button : s.disabledButton} disabled={!directions.east} onClick={() => changeRoom("east")}>
-             
-            </button>
+        △
+             </button>
         </div>
-        <button className={directions.south ? s.button : s.disabledButton} disabled={!directions.south} onClick={() => changeRoom("south")}>
+
+        <div className={s.eastWestContainer}>
+           
+
+        <div className={s.buttonContainer}>
+        <button className={directions.west ? s.button : s.disabledButton} disabled={!directions.west} onClick={() => changeRoom("west")}>
+        ◁
+         </button>
+        </div>
+
+     
+            <div className={s.emptySpaceContainer}>
+            <div className={s.emptySpace}>
+                <div className={s.emptySpaceCircle}>
+
+                </div>
+            </div>
+            </div>
         
+            <div className={s.buttonContainer}>
+            <button className={directions.east ? s.button : s.disabledButton} disabled={!directions.east} onClick={() => changeRoom("east")}>
+            ▷
+            </button>
+            </div>
+  
+        </div>
+       
+       <div className={s.buttonContainer}>
+       <button className={directions.south ? s.button : s.disabledButton} disabled={!directions.south} onClick={() => changeRoom("south")}>
+       ▽
         </button>
+       </div>
+ 
       </div>
       </div>
       </div>
@@ -151,7 +176,7 @@ export default function NavigationComponent() {
         <div className={s.middleContainer}>
         <div className={s.middleTextContainer}>
             <span className={s.middleText}>
-                Super NinTOMdo
+                SUPER NINTOMDO
             </span>
             <span className={s.smallMiddleText}>
                 A CSS 360 Project
@@ -159,8 +184,21 @@ export default function NavigationComponent() {
         </div>
 
         <div className={s.slantedButtonsContainer}>
+        <div className={s.slantedButtonContainer}>
+        <div className={s.slantedButton}>
+            
+            </div>
+            <span className={s.slantedButtonText}>
+            SELECT
+            </span>
+        </div>
+        <div className={s.slantedButtonContainer}>
         <div className={s.slantedButton}></div>
-        <div className={s.slantedButton}></div>
+        <span className={s.slantedButtonText}>
+        START
+        </span>
+        </div>
+        
         </div>
         </div>
 
@@ -172,7 +210,7 @@ export default function NavigationComponent() {
                 
             </div>
 
-            <div className={s.eastWestContainer}>
+            <div className={s.rightEastWestContainer}>
                 <div className={s.lightCircleButton}>
 
                 </div>
@@ -190,3 +228,17 @@ export default function NavigationComponent() {
     </div>
   )
 }
+const SvgIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlSpace="preserve"
+      id="Layer_1"
+      width="800"
+      height="800"
+      fill="#000"
+      version="1.1"
+      viewBox="0 0 511.509 511.509"
+    >
+      <path d="M498.675 493.845 265.16 5.568c-3.541-7.424-15.701-7.424-19.243 0L11.251 496.235c-1.579 3.307-1.344 7.189.597 10.283s5.355 4.992 9.024 4.992h469.76c5.888 0 10.667-4.779 10.667-10.667a10.6 10.6 0 0 0-2.624-6.998"></path>
+    </svg>
+  );

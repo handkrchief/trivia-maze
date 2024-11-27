@@ -1,3 +1,4 @@
+import { useThemeContext } from '../../context/ThemeContext';
 import Room from '../../models/Room';
 import RoomCell from '../RoomCell/RoomCell';
 
@@ -10,17 +11,20 @@ import RoomCell from '../RoomCell/RoomCell';
 */
 
 export default function MazeComponent({ maze }: { maze: Room[][] }) {
+    const {themeColors} = useThemeContext();
     let rowCount = 0;
     console.log(maze)
     return (
-        <div className={`w-full h-full flex flex-col`}>
-            {maze.map((row, rowIndex) => (
-                <div className="flex flex-row w-full h-full justify-center" key={rowCount++}>
-                    {row.map((_, cellIndex) => (
+        <div className={` ${themeColors.primaryOutline}`} >
+            <div className={` flex flex-col ${themeColors.primaryDivide} divide-y`}>
+                {maze.map((row, rowIndex) => (
+                    <div className={`flex flex-row justify-center divide-x ${themeColors.primaryDivide}`}  key={rowCount++}>
+                        {row.map((_, cellIndex) => (
                         <RoomCell key={`${rowIndex}-${cellIndex}`}  room={maze[rowIndex][cellIndex]} />
                     ))}
                 </div>
             ))}
+        </div>
         </div>
     );
 }
