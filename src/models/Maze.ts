@@ -61,7 +61,54 @@ export default class Maze{
         }
     }
 
+    /**
+     * Checks if the maze can be solved.
+     * 
+     * @param theSize - The size of the maze.
+     * @returns {boolean} - True if the maze can be solved, false otherwise.
+    */
+    public canSolve(theSize:number):boolean{
+        let theQueue:Room[] = [];
+        let theVisited:boolean[][] = Array.from({length:theSize}, () => Array(theSize).fill(false));
+        let foundExit:boolean = false;
+        let foundStart:boolean = false;
 
+        theQueue.push(this.myStartingRoom);
+        theVisited[0][0] = true;
+
+
+        if(!this.myStartingRoom || !this.myExitRoom){
+            return false;
+        }
+
+
+        while(theQueue.length > 0){
+            let theCurrentRoom = theQueue.shift();
+            if(!theCurrentRoom){
+                return false;
+            }
+            if(theCurrentRoom === this.myExitRoom){
+                foundExit = true;
+            }
+            if(theCurrentRoom === this.myStartingRoom){
+                foundStart = true;
+            }
+            if(foundExit && foundStart){
+                return true;
+            }
+            let theAdjacentRooms = this.getAdjacentRooms(theCurrentRoom);
+            for (let adjRoom of theAdjacentRooms){
+                if(adjRoom 
+                    && !theVisited[adjRoom.getRow()][adjRoom.getCol()] 
+                    && adjRoom.getIsOpen())
+                {
+                    theQueue.push(adjRoom);
+                    theVisited[adjRoom.getRow()][adjRoom.getCol()] = true;
+                }
+            }
+        }
+        return false;
+    }
     /**
      * Get the starting room
      * 
@@ -107,6 +154,20 @@ export default class Maze{
     }
 
     /**
+     * Get the adjacent rooms to the current room.
+     * 
+     * @param theCurrentRoom - The current room.
+     * @returns {Room[]} - The adjacent rooms.
+    */
+    private getAdjacentRooms(theCurrentRoom:Room):any[]{
+        let theNorthRoom = this.getAdjacentRoom({currentRoom:theCurrentRoom, direction:"north"});
+        let theSouthRoom = this.getAdjacentRoom({currentRoom:theCurrentRoom, direction:"south"});
+        let theEastRoom = this.getAdjacentRoom({currentRoom:theCurrentRoom, direction:"east"});
+        let theWestRoom = this.getAdjacentRoom({currentRoom:theCurrentRoom, direction:"west"});
+        return [theNorthRoom, theSouthRoom, theEastRoom, theWestRoom];
+    }
+
+    /**
      * Get the maze 
      * 
      * @returns {Room[][]} - The maze
@@ -129,11 +190,21 @@ export default class Maze{
         }
     }
 
+    /**
+     * Sets the room at a given row and column.
+     * 
+     * @param theRow - The row of the room.
+     * @param theCol - The column of the room.
+     * @param theRoom - The room to set.
+    */
     public setRoom({theRow, theCol, theRoom}:{theRow:number, theCol:number, theRoom:Room}){
         if(theRow && theCol && this.myRooms[theRow][theCol]){
             this.myRooms[theRow][theCol] = theRoom
         }
     }
+    /**
+     * Prints the maze to the console.
+    */
     public printMaze(){
         console.log("+" + "-".repeat(this.myRooms[0].length ) + "+");
         for(let i = 0; i < this.myRooms.length; i++){
