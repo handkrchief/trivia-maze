@@ -18,7 +18,7 @@ export default function NavigationComponent() {
      * 
     */
     const {player} = usePlayerContext();
-    const {myCurrentRoom, setMyCurrentRoom, myMaze, startOver, setIsAnsweringQuestions,setMyCurrentQuestion,setMyRoomToNavigateTo} = useMazeContext();
+    const {myCurrentRoom, setMyCurrentRoom, myMaze, startOver, setIsAnsweringQuestions,setMyCurrentQuestion,setMyRoomToNavigateTo, mySize} = useMazeContext();
     
     /**
      * The state for the directions.
@@ -55,6 +55,14 @@ export default function NavigationComponent() {
                     setIsAnsweringQuestions(true);
                     setMyCurrentQuestion(q); 
                     setMyRoomToNavigateTo(theRoom);
+
+                    const item:Item | undefined = theRoom.getItem();
+                    if(item){
+                        player.addItem(item);
+                        theRoom.removeItem();
+                        alert("You found an item!");
+                    }
+
                     return
                 }
 
@@ -70,12 +78,7 @@ export default function NavigationComponent() {
                     startOver();
                     return;
                 }
-                const item:Item | undefined = theRoom.getItem();
-                if(item){
-                    player.addItem(item);
-                    theRoom.removeItem();
-                    alert("You found an item!");
-                }
+                
                 player.setRoom(theRoom);
 
                 theRoom.setTypeAsNumber(7);
@@ -114,6 +117,7 @@ export default function NavigationComponent() {
             }
         }
     }
+
     }
 
     /**
