@@ -56,6 +56,15 @@ export default function PreGameOptionsComponent() {
 
         }
       }
+
+      // const handleLoadButton = async(): Promise<void> => {
+      // //   const temp:number[][] = [[0],[0]];
+      // //  let myCurrentMaze = new Maze(temp);
+      //  setStarted(true);
+      //  let myCurrentMaze = localStorage.getItem("maze");
+
+      //  setMyMaze(myCurrentMaze);
+      // }
     
     
 
@@ -72,7 +81,10 @@ export default function PreGameOptionsComponent() {
         }
       }, [mySize]);
 
-      
+      // const getSavedMaze = () => {
+      //   const maze = localStorage.getItem("maze");
+      //   return maze ? JSON.parse(maze) : null;
+      // }
 
   return (
     <div className={`${s.container} ${themeColors.primaryOutline} ${themeColors.formBackground}`}>
@@ -84,7 +96,8 @@ export default function PreGameOptionsComponent() {
       </div>
  
       <button disabled={!mySize || mySize < 4} className={ !mySize || mySize < 4 ? themeColors.disabledButton : themeColors.primaryButton} onClick={handleClickButton}>Generate Maze</button>
-
+       {/* <button onClick={handleLoadButton}>Show Button</button>
+      {getSavedMaze() && <button>Conditional Button</button>} */}
       </div>
   )
 }

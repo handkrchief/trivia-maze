@@ -9,6 +9,7 @@ import sampleData from "../data/sampleQuestions.json"
  * The Context file for the maze, and all its needed values/states.
  *
  *  @author Zach Sanchez (zachs00)
+ *  @author Caleb Carroll (calebca)
  *  @version November 17th, 2024
  */
 
@@ -118,6 +119,9 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [myRoomToNavigateTo, setMyRoomToNavigateTo] = useState<Room | null>(null);
 
+  /**
+   * Hook that saves the state of the maze after any updates to either the maze itself, or the current room that the player is in
+   */
   useEffect(() => {
     myMaze?.saveMaze();
   }, [myMaze, myCurrentRoom])

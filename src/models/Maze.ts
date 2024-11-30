@@ -27,11 +27,16 @@ export default class Maze{
      */
     private myExitRoom!: Room;
 
+    /**
+     * The Size of the Maze.
+     */
+    private mySize: number;
     
 
     constructor(theMaze:number[][]){
         let theDimensions:number = theMaze.length;
         this.myRooms = [];
+        this.mySize = theDimensions;
         for(let i = 0; i < theDimensions; i++){
             this.myRooms[i] = [];
             for(let j = 0; j < theDimensions; j++){
@@ -171,11 +176,13 @@ export default class Maze{
         let JSon:Record<string, any> = {
             Room:[],
             start:null,
-            end:null
+            end:null,
+            size:null
         }
         JSon.rooms = this.myRooms;
         JSon.start = this.myStartingRoom;
         JSon.exit = this.myExitRoom;
+        JSon.size = this.mySize;
 
         return JSon;
     }
@@ -185,6 +192,7 @@ export default class Maze{
             if(theJSon.rooms) this.myRooms = theJSon.rooms;
             if(theJSon.start) this.myStartingRoom = theJSon.start;
             if(theJSon.exit) this.myExitRoom = theJSon.exit;
+            if(theJSon.size) this.mySize = theJSon.size;
         }
     }
 
