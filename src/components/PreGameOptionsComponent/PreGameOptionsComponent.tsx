@@ -48,6 +48,16 @@ export default function PreGameOptionsComponent() {
           setMyMaze(myCurrMaze);
           setMyCurrentRoom(myCurrMaze.getStartingRoom());
           
+          let gameOver = myCurrMaze.canSolve(mySize);
+          while(!gameOver){
+            let newMazeAsNumbers:number[][] = myMazeGenerator.mazeGeneration(mySize);
+            let newMaze:Maze = new Maze(newMazeAsNumbers);
+            newMaze = setQuestionsInRooms(newMaze);
+            setMyMazeAsNumbers(newMazeAsNumbers);
+            setMyMaze(newMaze);
+            setMyCurrentRoom(newMaze.getStartingRoom());
+            gameOver = myCurrMaze.canSolve(mySize);
+          }
 
         } catch (error) {
           console.error(error);
