@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import Room from "../models/Room";
 import Maze from "../models/Maze";
 import Question from "../models/Question";
@@ -117,6 +117,10 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
   const [isAnsweringQuestions, setIsAnsweringQuestions] = useState<boolean>(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [myRoomToNavigateTo, setMyRoomToNavigateTo] = useState<Room | null>(null);
+
+  useEffect(() => {
+    myMaze?.saveMaze();
+  }, [myMaze, myCurrentRoom])
 
   /**
    * Resets all the states to their default values.

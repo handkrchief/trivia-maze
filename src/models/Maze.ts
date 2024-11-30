@@ -26,6 +26,8 @@ export default class Maze{
      */
     private myExitRoom!: Room;
 
+    
+
     constructor(theMaze:number[][]){
         let theDimensions:number = theMaze.length;
         this.myRooms = [];
@@ -160,4 +162,38 @@ export default class Maze{
         }
         console.log("+" + "-".repeat(this.myRooms[0].length ) + "+");
     }
+
+    /**
+     * Saves the fields of the maze to JSon for saving state of the maze.
+     */
+    public toJson(){
+        let JSon:Record<string, any> = {
+            Room:[],
+            start:null,
+            end:null
+        }
+        JSon.rooms = this.myRooms;
+        JSon.start = this.myStartingRoom;
+        JSon.exit = this.myExitRoom;
+
+        return JSon;
+    }
+
+    public fromJSon(theJSon: any){
+        if(theJSon){
+            if(theJSon.rooms) this.myRooms = theJSon.rooms;
+            if(theJSon.start) this.myStartingRoom = theJSon.start;
+            if(theJSon.exit) this.myExitRoom = theJSon.exit;
+        }
+    }
+
+    public saveMaze() {
+        localStorage.setItem("maze", JSON.stringify(this.toJson()));
+    }
+
+    public loadMaze() {
+        this.fromJSon(localStorage.getItem("maze"));
+    }
+    
+
 }
