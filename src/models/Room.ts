@@ -261,4 +261,18 @@ export default class Room {
         this.myItem = undefined;
     }
 
+    public fromJson(theJson:any){
+        if(theJson){
+            this.myRow = theJson.myRow;
+            this.myCol = theJson.myCol;
+            this.isOpen = theJson.isOpen;
+            this.isLocked = theJson.isLocked;
+            this.isItemRoom = theJson.isItemRoom;
+            this.isAnswered = theJson.isAnswered;
+            this.myQuestion = theJson.myQuestion;
+            if(theJson.myItem) this.myItem = theJson.myItem;
+            this.myTypeAsNumber = theJson.myTypeAsNumber;
+        }
+    }
+
 }

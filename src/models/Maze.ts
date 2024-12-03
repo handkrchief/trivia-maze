@@ -96,7 +96,14 @@ export default class Maze{
      * @returns Room; the room at the given row and column, or null if not found/valid
     */
     public getAdjacentRoom({currentRoom, direction}:{currentRoom:Room, direction:string}): Room | null{
+        
+        
         if(currentRoom){
+            if(!(currentRoom instanceof Room)){
+                let tempRoom = new Room({theRow:currentRoom.myRow, theCol:currentRoom.myCol})
+                tempRoom.fromJson(currentRoom)
+                return this.getAdjacentRoom({currentRoom:tempRoom, direction});
+            }
             console.log(currentRoom);
         let theRow:number = currentRoom.getRow();
         let theCol:number = currentRoom.getCol();
