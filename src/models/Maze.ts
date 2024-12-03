@@ -31,42 +31,46 @@ export default class Maze{
      * The Size of the Maze.
      */
     private mySize: number;
+
+    private myCurrentRoom: Room;
     
 
     constructor(theMaze:number[][]){
         let theDimensions:number = theMaze.length;
         this.myRooms = [];
         this.mySize = theDimensions;
-        for(let i = 0; i < theDimensions; i++){
-            this.myRooms[i] = [];
-            for(let j = 0; j < theDimensions; j++){
-                this.myRooms[i][j] = new Room({theRow:i, theCol:j});
+        for(let row = 0; row < theDimensions; row++){
+            this.myRooms[row] = [];
+            for(let col = 0; col < theDimensions; col++){
+                this.myRooms[row][col] = new Room({theRow:row, theCol:col});
             
-            switch(theMaze[i][j]){
+            switch(theMaze[row][col]){
                 case 5:
-                    this.myRooms[i][j].setTypeAsNumber(7);
-                    this.myStartingRoom = this.myRooms[i][j];
+                    this.myRooms[row][col].setTypeAsNumber(7);
+                    this.myStartingRoom = this.myRooms[row][col];
                     this.myStartingRoom.setIsOpen(true);
+                    this.myCurrentRoom = this.myStartingRoom;
                     break;
                 case 9:
-                    this.myRooms[i][j].setTypeAsNumber(9);
-                    this.myExitRoom = this.myRooms[i][j];
+                    this.myRooms[row][col].setTypeAsNumber(9);
+                    this.myExitRoom = this.myRooms[row][col];
                     this.myExitRoom.setIsOpen(true);
                     break;
                 case 1:
-                    this.myRooms[i][j].setTypeAsNumber(1);
-                    this.myRooms[i][j].setIsOpen(true);
+                    this.myRooms[row][col].setTypeAsNumber(1);
+                    this.myRooms[row][col].setIsOpen(true);
                     break;
                 case 4:
-                    this.myRooms[i][j].setTypeAsNumber(4);
-                    this.myRooms[i][j].setIsItemRoom(true);
-                    this.myRooms[i][j].setIsOpen(true);
+                    this.myRooms[row][col].setTypeAsNumber(4);
+                    this.myRooms[row][col].setIsItemRoom(true);
+                    this.myRooms[row][col].setIsOpen(true);
                     break;
                 default:
                     break;
             }
             }
         }
+        this.myCurrentRoom = this.myStartingRoom;
     }
 
 
@@ -97,14 +101,13 @@ export default class Maze{
     */
     public getAdjacentRoom({currentRoom, direction}:{currentRoom:Room, direction:string}): Room | null{
         
-        
         if(currentRoom){
             if(!(currentRoom instanceof Room)){
                 let tempRoom = new Room({theRow:currentRoom.myRow, theCol:currentRoom.myCol})
                 tempRoom.fromJson(currentRoom)
                 return this.getAdjacentRoom({currentRoom:tempRoom, direction});
             }
-            console.log(currentRoom);
+
         let theRow:number = currentRoom.getRow();
         let theCol:number = currentRoom.getCol();
 
@@ -154,10 +157,10 @@ export default class Maze{
     }
     public printMaze(){
         console.log("+" + "-".repeat(this.myRooms[0].length ) + "+");
-        for(let i = 0; i < this.myRooms.length; i++){
+        for(let row = 0; row < this.myRooms.length; row++){
             let theRow:string = "|";
-            for(let j = 0; j < this.myRooms[i].length; j++){
-                let theRoom:Room = this.myRooms[i][j];
+            for(let col = 0; col < this.myRooms[row].length; col++){
+                let theRoom:Room = this.myRooms[row][col];
                 if(theRoom.getIsItemRoom()){
                     theRow += "I";
                 }else if(theRoom.getIsLocked()){
@@ -197,52 +200,54 @@ export default class Maze{
         return JSon;
     }
 
-
+    /**
+     * Loads the state from JSON in local storage.
+     * @param theJSon 
+     */
     public fromJSon(theJSon: any){
-        console.log(JSON.parse(theJSon));
         const loadData = JSON.parse(theJSon);
-        
         if(loadData){
             let newRooms = [];
-            let newRow=[];
-
             if(loadData.myRooms){
                 this.myRooms = loadData.myRooms;
                 for(let row = 0; row < loadData.mySize; row++){
+                    let newRow=[];
                     for(let col = 0; col < loadData.mySize; col++){
                         let currentRoom = loadData.myRooms[row][col];
+                        
                         const tempRoom = new Room({theRow:row,theCol:col});
-                        tempRoom.setTypeAsNumber(currentRoom.myTypeAsNumber);
+                        
                         if(loadData.myRooms[row][col].myQuestion){
-                            tempRoom.setQuestion(loadData.myRooms[row][col].myQuestion);
+                            tempRoom.setQuestion(currentRoom.myQuestion);
                         }
-                        
-                        // console.log(loadData.myRooms[row][col].myQuestion);
-                        
+                        tempRoom.fromJson(loadData.myRooms[row][col]);
+                        if(currentRoom.myTypeAsNumber == 7 || currentRoom.myTypeAsNumber == "7"){
+                            this.myCurrentRoom = tempRoom;
+                        }
                         newRow.push(tempRoom);
                     }
                     newRooms.push(newRow);
                 }
-                console.log(this.myRooms);
-                console.log(newRooms);
                 this.myRooms = newRooms;
-
             } 
             if(loadData.myStartingRoom) this.myStartingRoom = loadData.myStartingRoom;
             if(loadData.myExitRoom) this.myExitRoom = loadData.myExitRoom;
             if(loadData.mySize) this.mySize = loadData.mySize;
-        } else {
-            console.log("no valid save");
+            
         }
     }
 
+    /**
+     * Sets an item in localStorage called "maze" using the JSON.stringify method.
+     */
     public saveMaze() {
         localStorage.setItem("maze", JSON.stringify(this.toJson()));
     }
 
+    /**
+     * Calls thefromJSon method.
+     */
     public loadMaze() {
         this.fromJSon(localStorage.getItem("maze"));
     }
-    
-
 }
