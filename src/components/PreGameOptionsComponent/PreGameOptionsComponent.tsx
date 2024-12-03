@@ -57,14 +57,23 @@ export default function PreGameOptionsComponent() {
         }
       }
 
-      // const handleLoadButton = async(): Promise<void> => {
-      // //   const temp:number[][] = [[0],[0]];
-      // //  let myCurrentMaze = new Maze(temp);
-      //  setStarted(true);
-      //  let myCurrentMaze = localStorage.getItem("maze");
-
-      //  setMyMaze(myCurrentMaze);
-      // }
+      const handleLoadButton = () => {
+        const chosenThemeAsTest: QuestionsThemes = "Test"
+        initializeQuestionsFromDB(chosenThemeAsTest, mySize);
+        const myMazeGenerator:MazeGenerator = new MazeGenerator();
+        const myMazeAsNumbers:number[][] = myMazeGenerator.mazeGeneration(mySize);
+        let myCurrMaze:Maze = new Maze(myMazeAsNumbers);
+        myCurrMaze.fromJSon(localStorage.getItem("maze"));
+        myCurrMaze = setQuestionsInRooms(myCurrMaze);
+        // setMyMazeAsNumbers(myMazeAsNumbers);
+        setStarted(true);
+        
+        
+          setMyMaze(myCurrMaze);
+        
+      //  setMyMaze(getSavedMaze());
+       setMyCurrentRoom(myCurrMaze.getStartingRoom());
+      }
     
     
 
@@ -96,8 +105,7 @@ export default function PreGameOptionsComponent() {
       </div>
  
       <button disabled={!mySize || mySize < 4} className={ !mySize || mySize < 4 ? themeColors.disabledButton : themeColors.primaryButton} onClick={handleClickButton}>Generate Maze</button>
-       {/* <button onClick={handleLoadButton}>Show Button</button>
-      {getSavedMaze() && <button>Conditional Button</button>} */}
+       {localStorage.getItem("maze") && <button onClick={handleLoadButton}>Load</button>}
       </div>
   )
 }

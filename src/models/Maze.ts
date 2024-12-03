@@ -96,6 +96,8 @@ export default class Maze{
      * @returns Room; the room at the given row and column, or null if not found/valid
     */
     public getAdjacentRoom({currentRoom, direction}:{currentRoom:Room, direction:string}): Room | null{
+        if(currentRoom){
+            console.log(currentRoom);
         let theRow:number = currentRoom.getRow();
         let theCol:number = currentRoom.getCol();
 
@@ -111,7 +113,8 @@ export default class Maze{
             default:
                 return null;
         }
-
+        }
+        return null;
     }
 
     /**
@@ -187,12 +190,42 @@ export default class Maze{
         return JSon;
     }
 
+
     public fromJSon(theJSon: any){
-        if(theJSon){
-            if(theJSon.rooms) this.myRooms = theJSon.rooms;
-            if(theJSon.start) this.myStartingRoom = theJSon.start;
-            if(theJSon.exit) this.myExitRoom = theJSon.exit;
-            if(theJSon.size) this.mySize = theJSon.size;
+        console.log(JSON.parse(theJSon));
+        const loadData = JSON.parse(theJSon);
+        
+        if(loadData){
+            let newRooms = [];
+            let newRow=[];
+
+            if(loadData.myRooms){
+                this.myRooms = loadData.myRooms;
+                for(let row = 0; row < loadData.mySize; row++){
+                    for(let col = 0; col < loadData.mySize; col++){
+                        let currentRoom = loadData.myRooms[row][col];
+                        const tempRoom = new Room({theRow:row,theCol:col});
+                        tempRoom.setTypeAsNumber(currentRoom.myTypeAsNumber);
+                        if(loadData.myRooms[row][col].myQuestion){
+                            tempRoom.setQuestion(loadData.myRooms[row][col].myQuestion);
+                        }
+                        
+                        // console.log(loadData.myRooms[row][col].myQuestion);
+                        
+                        newRow.push(tempRoom);
+                    }
+                    newRooms.push(newRow);
+                }
+                console.log(this.myRooms);
+                console.log(newRooms);
+                this.myRooms = newRooms;
+
+            } 
+            if(loadData.myStartingRoom) this.myStartingRoom = loadData.myStartingRoom;
+            if(loadData.myExitRoom) this.myExitRoom = loadData.myExitRoom;
+            if(loadData.mySize) this.mySize = loadData.mySize;
+        } else {
+            console.log("no valid save");
         }
     }
 

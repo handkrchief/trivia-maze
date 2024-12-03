@@ -81,6 +81,11 @@ export const useMazeContext = () => {
   return context;
 };
 
+// const getSavedMaze = () => {
+//   const maze = localStorage.getItem("maze");
+//   return maze ? JSON.parse(maze) : null;
+// }
+
 
 /**
  * Honestly unnecessary, was experimenting with cleaning up the declaration,
@@ -122,9 +127,12 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
   /**
    * Hook that saves the state of the maze after any updates to either the maze itself, or the current room that the player is in
    */
-  useEffect(() => {
-    myMaze?.saveMaze();
-  }, [myMaze, myCurrentRoom])
+  // useEffect(() => {
+  //   if(myMaze){
+  //     myMaze.saveMaze();
+  //   }
+    
+  // }, [myMaze, myCurrentRoom])
 
   /**
    * Resets all the states to their default values.
