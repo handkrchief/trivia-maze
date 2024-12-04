@@ -83,4 +83,12 @@ export default class Player {
         }
         return null;
     }
+
+    /**
+     * 
+     * @returns {Item[]} The array of items for a player.
+     */
+    public getItems(): Item[] {
+        return this.myItems;
+    }
 }
