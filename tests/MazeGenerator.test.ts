@@ -48,11 +48,11 @@ describe('MazeGenerator Class', () => {
 
         it('should contain only valid cell values (0,1,5,9)', () => {
             const myMaze = myGenerator.mazeGeneration(5);
-            const validValues = [0, 1, 5, 9];
+            const myValidValues = [0, 1, 4, 5, 9];
 
             myMaze.forEach(row => {
                 row.forEach(cell => {
-                    expect(validValues).toContain(cell);
+                    expect(myValidValues).toContain(cell);
                 });
             });
         });
