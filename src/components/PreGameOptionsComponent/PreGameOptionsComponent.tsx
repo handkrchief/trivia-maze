@@ -47,13 +47,10 @@ export default function PreGameOptionsComponent() {
           setStarted(true);
           setMyMaze(myCurrMaze);
           setMyCurrentRoom(myCurrMaze.getStartingRoom());
-          
-
         } catch (error) {
           console.error(error);
         } finally {
           setLoading(false);
-
         }
       }
 
@@ -72,7 +69,7 @@ export default function PreGameOptionsComponent() {
           setMyMaze(myCurrMaze);
         
       //  setMyMaze(getSavedMaze());
-       setMyCurrentRoom(myCurrMaze.getStartingRoom());
+       setMyCurrentRoom(myCurrMaze.getCurrentRoom());
       }
     
     
@@ -104,8 +101,10 @@ export default function PreGameOptionsComponent() {
         <input className={s.sizeInput} type="number" value={mySize} onChange={(e) => setMySize(parseInt(e.target.value))} />
       </div>
  
+      <div className={s.buttons}>
       <button disabled={!mySize || mySize < 4} className={ !mySize || mySize < 4 ? themeColors.disabledButton : themeColors.primaryButton} onClick={handleClickButton}>Generate Maze</button>
-       {localStorage.getItem("maze") && <button onClick={handleLoadButton}>Load</button>}
+      <button className={localStorage.getItem("maze") ? themeColors.loadButton : themeColors.disabledButton} onClick={handleLoadButton}>Load</button>
+      </div>
       </div>
   )
 }
