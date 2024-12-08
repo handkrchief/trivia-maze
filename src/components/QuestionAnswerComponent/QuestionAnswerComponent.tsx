@@ -15,7 +15,7 @@ export default function QuestionAnswerComponent() {
 
     const { myCurrentQuestion, isCorrect, setIsCorrect, setIsAnsweringQuestions,
             myRoomToNavigateTo, setMyCurrentRoom, myMazeAsNumbers, myMaze, myCurrentRoom,
-            gameOverMessage, setGameOverMessage mySize, startOver
+            gameOverMessage, setGameOverMessage, mySize, startOver
           } = useMazeContext()
     /**
      * The theme and theme colors for the QuestionAnswerComponent.
