@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useMazeContext } from '../../context/MazeContext';
 import s from './QuestionAnswerComponent.module.css';
 import { useThemeContext } from '../../context/ThemeContext';
+import GameModal from '../GameModal/GameModal';
 
 /**
  * The QuestionAnswerComponent component, displays the question and answer options.
@@ -14,7 +15,7 @@ export default function QuestionAnswerComponent() {
 
     const {myCurrentQuestion, isCorrect, setIsCorrect, setIsAnsweringQuestions,
             myRoomToNavigateTo, setMyCurrentRoom, myMazeAsNumbers, myMaze,
-            myCurrentRoom
+                myCurrentRoom, gameOverMessage, setGameOverMessage
     }  = useMazeContext()
     /**
      * The theme and theme colors for the QuestionAnswerComponent.
@@ -57,13 +58,21 @@ export default function QuestionAnswerComponent() {
                 let col = myRoomToNavigateTo?.getCol();
                 if(row !== undefined && col !== undefined && myRoomToNavigateTo){
                 if(isAnswerCorrect){
+                    if(myRoomToNavigateTo.getTypeAsNumber() == 9){
+                        setGameOverMessage("You have completed the maze!");
+                        alert("You have completed the maze!");
+                    }
                     myRoomToNavigateTo.setTypeAsNumber(7);
                     myRoomToNavigateTo.setIsAnswered(true);
+
+                    myMaze?.setCurrentRoom(myRoomToNavigateTo);
+                    
                     setMyCurrentRoom(myRoomToNavigateTo);
                     myCurrentRoom?.setTypeAsNumber(1);
                     
                     setMessage("Correct answer!");
                 }else{
+           
                     myRoomToNavigateTo.setIsOpen(false);
                     myRoomToNavigateTo.setIsLocked(true);
                     myRoomToNavigateTo.setTypeAsNumber(3);
@@ -97,6 +106,7 @@ export default function QuestionAnswerComponent() {
 
   return (
     <div className={s.container + " " + themeColors.primaryOutline}>
+    
         <div className={s.questionContainer }>
             <span className={s.questionText + " " + themeColors.primaryText}>
                 {currentText}
