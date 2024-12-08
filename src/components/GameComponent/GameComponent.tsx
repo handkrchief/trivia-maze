@@ -6,6 +6,7 @@ import TvComponent from '../TvComponent/TvComponent';
 import DeskComponent from '../DeskComponent/DeskComponent';
 import QuestionAnswerComponent from '../QuestionAnswerComponent/QuestionAnswerComponent';
 import GameModal from '../GameModal/GameModal';
+import ItemsBar from '../ItemsBar/ItemsBar';
 
 /**
  * The GameComponent is the main component that renders the game.
@@ -33,6 +34,7 @@ export default function GameComponent() {
         { myMaze && !isAnsweringQuestions && <div className={s.componentContainer}><DeskComponent/></div>}
         {!isAnsweringQuestions && <div className={s.componentContainer}><NavigationComponent /></div>}
         {isAnsweringQuestions && <div className={s.componentContainer}><QuestionAnswerComponent/></div>}
+        {isAnsweringQuestions && <div className={s.componentContainer}><ItemsBar/></div>}
         </>}
     </div>
   )
