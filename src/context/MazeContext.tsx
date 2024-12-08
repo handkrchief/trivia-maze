@@ -35,6 +35,7 @@ export interface MazeContextType {
   loading: boolean;
   isAnsweringQuestions: boolean;
   isCorrect: boolean | null;
+  gameOverMessage: string;
   myQuestions: Question[] | null;
   startOver: () => void; 
   setQuestionsInRooms: (theMaze:Maze) => Maze;
@@ -52,6 +53,7 @@ export interface MazeContextType {
   setMyRoomToNavigateTo: React.Dispatch<React.SetStateAction<Room | null>>;
   setMyQuestions: React.Dispatch<React.SetStateAction<Question[] | null>>;
   setIsCorrect: React.Dispatch<React.SetStateAction<boolean | null>>;
+  setGameOverMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 
@@ -123,6 +125,7 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
   const [isAnsweringQuestions, setIsAnsweringQuestions] = useState<boolean>(false);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [myRoomToNavigateTo, setMyRoomToNavigateTo] = useState<Room | null>(null);
+  const [gameOverMessage, setGameOverMessage] = useState<string>("");
 
   /**
    * Hook that saves the state of the maze after any updates to either the maze itself, or the current room that the player is in
@@ -151,13 +154,20 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     setMyRoomToNavigateTo(null);
     setMyCurrentRoom(null);
     setMyPowerUp("");
+    setGameOverMessage(""); 
   }
+
+  useEffect(()=>{
+
+  },[])
 
   const addQuestion = (question:Question) : void =>{
     if(question){
       myQuestions?.push(question)
     }
   }
+
+  
 
   const consumeQuestion = (): Question | null => {
     //for sample sake im just popping top item
@@ -252,6 +262,7 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     myRoomToNavigateTo,
     isAnsweringQuestions,
     isCorrect,
+    gameOverMessage,
     started,
     loading,
     myQuestions,
@@ -270,7 +281,8 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     setStarted,
     setMyCurrentRoom,
     setMyCurrentQuestion,
-    setIsCorrect
+    setIsCorrect,
+    setGameOverMessage
   };
 
 
