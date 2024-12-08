@@ -42,6 +42,10 @@
     @apply w-full h-full flex justify-center items-center ;
 }
 
+.buttonOne{
+    @apply w-full flex flex-row gap-2;
+}
+
 .submitButton{
     @apply w-full py-4 bg-purple-950  ;
 }
