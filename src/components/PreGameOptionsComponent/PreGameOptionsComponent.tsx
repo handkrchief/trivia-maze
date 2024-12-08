@@ -46,8 +46,7 @@ export default function PreGameOptionsComponent() {
           setMyMazeAsNumbers(myMazeAsNumbers);
           setStarted(true);
           setMyMaze(myCurrMaze);
-          setMyCurrentRoom(myCurrMaze.getStartingRoom());
-          
+          setMyCurrentRoom(myCurrMaze.getStartingRoom());        
           let gameOver = myCurrMaze.canSolve(mySize);
           while(!gameOver){
             let newMazeAsNumbers:number[][] = myMazeGenerator.mazeGeneration(mySize);
@@ -58,13 +57,29 @@ export default function PreGameOptionsComponent() {
             setMyCurrentRoom(newMaze.getStartingRoom());
             gameOver = myCurrMaze.canSolve(mySize);
           }
-
         } catch (error) {
           console.error(error);
         } finally {
           setLoading(false);
-
         }
+      }
+
+      const handleLoadButton = () => {
+        const chosenThemeAsTest: QuestionsThemes = "Test"
+        initializeQuestionsFromDB(chosenThemeAsTest, mySize);
+        const myMazeGenerator:MazeGenerator = new MazeGenerator();
+        const myMazeAsNumbers:number[][] = myMazeGenerator.mazeGeneration(mySize);
+        let myCurrMaze:Maze = new Maze(myMazeAsNumbers);
+        myCurrMaze.fromJSon(localStorage.getItem("maze"));
+        myCurrMaze = setQuestionsInRooms(myCurrMaze);
+        // setMyMazeAsNumbers(myMazeAsNumbers);
+        setStarted(true);
+        
+        
+          setMyMaze(myCurrMaze);
+        
+      //  setMyMaze(getSavedMaze());
+       setMyCurrentRoom(myCurrMaze.getCurrentRoom());
       }
     
     
@@ -82,7 +97,10 @@ export default function PreGameOptionsComponent() {
         }
       }, [mySize]);
 
-      
+      // const getSavedMaze = () => {
+      //   const maze = localStorage.getItem("maze");
+      //   return maze ? JSON.parse(maze) : null;
+      // }
 
   return (
     <div className={`${s.container} ${themeColors.primaryOutline} ${themeColors.formBackground}`}>
@@ -93,8 +111,10 @@ export default function PreGameOptionsComponent() {
         <input className={s.sizeInput} type="number" value={mySize} onChange={(e) => setMySize(parseInt(e.target.value))} />
       </div>
  
+      <div className={s.buttons}>
       <button disabled={!mySize || mySize < 4} className={ !mySize || mySize < 4 ? themeColors.disabledButton : themeColors.primaryButton} onClick={handleClickButton}>Generate Maze</button>
-
+      <button className={localStorage.getItem("maze") ? themeColors.loadButton : themeColors.disabledButton} onClick={handleLoadButton}>Load</button>
+      </div>
       </div>
   )
 }

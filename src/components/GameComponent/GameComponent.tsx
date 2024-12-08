@@ -5,6 +5,7 @@ import NavigationComponent from '../NavigationComponent/NavigationComponent';
 import TvComponent from '../TvComponent/TvComponent';
 import DeskComponent from '../DeskComponent/DeskComponent';
 import QuestionAnswerComponent from '../QuestionAnswerComponent/QuestionAnswerComponent';
+import GameModal from '../GameModal/GameModal';
 
 /**
  * The GameComponent is the main component that renders the game.
@@ -18,7 +19,7 @@ import QuestionAnswerComponent from '../QuestionAnswerComponent/QuestionAnswerCo
 */
 
 export default function GameComponent() {
-    const {myMaze,isAnsweringQuestions,  started} = useMazeContext();
+    const {myMaze,isAnsweringQuestions,  started, gameOverMessage} = useMazeContext();
     
 
   return (      
@@ -27,7 +28,7 @@ export default function GameComponent() {
 
         {started && 
         <>
-
+        {gameOverMessage !== "" && <GameModal />}
         {myMaze && !isAnsweringQuestions && <div className={s.componentContainer}><TvComponent /></div>}
         { myMaze && !isAnsweringQuestions && <div className={s.componentContainer}><DeskComponent/></div>}
         {!isAnsweringQuestions && <div className={s.componentContainer}><NavigationComponent /></div>}

@@ -119,6 +119,9 @@ export default function NavigationComponent() {
     }
 
     }
+    const handleSave = () => {
+        localStorage.setItem("maze", JSON.stringify(myMaze));
+    }
 
     /**
      * The useEffect to update the navigation.
@@ -189,9 +192,9 @@ export default function NavigationComponent() {
 
         <div className={s.slantedButtonsContainer}>
         <div className={s.slantedButtonContainer}>
-        <div className={s.slantedButton}>
+        <button onClick={handleSave} className={s.slantedButton}>
             
-            </div>
+            </button>
             <span className={s.slantedButtonText}>
             SELECT
             </span>

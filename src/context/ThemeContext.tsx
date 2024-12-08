@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { darkThemeColors, lightThemeColors, ThemeColors } from "../ThemeColors";
 
 /**
@@ -37,17 +37,28 @@ export const useThemeContext = () => {
   return context;
 };
 
+const initialTheme: string = "light";
+
+const getInitialState = () => {
+  const theme = localStorage.getItem("theme");
+  return theme ? JSON.parse(theme) : initialTheme;
+}
+
 /**
 * The Provider for the ThemeContext.
 * @param children - The children to render.
 * @returns The ThemeProvider.
 */
 export const ThemeContextProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
-    const [theme, setTheme] = useState<string>("light");
+    const [theme, setTheme] = useState<string>(getInitialState);
     const themeColors = theme === "light" ? lightThemeColors : darkThemeColors;
     const toggleTheme = () => { 
         setTheme(theme === "light" ? "dark" : "light");
     }
+
+    useEffect(() => {
+      localStorage.setItem("theme", JSON.stringify(theme));
+    },[theme]);
 
     return <ThemeContext.Provider value={{theme, setTheme, toggleTheme, themeColors}}>{children}</ThemeContext.Provider>
 }

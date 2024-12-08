@@ -6,6 +6,7 @@ export interface ThemeColors {
     primaryButton: string;
     formBackground: string;
     secondaryButton: string;
+    loadButton: string;
     disabledButton: string;
     outlinePrimaryButton: string;
     outlineSecondaryButton: string;
@@ -25,7 +26,7 @@ export const lightThemeColors: ThemeColors = {
     secondaryButton: `${buttonClass} bg-rose-600 hover:bg-rose-500 text-white`,
     outlineSecondaryButton: `${buttonClass} bg-transparent border border-rose-600 hover:bg-rose-500 text-white`,
     disabledButton: `${buttonClass} bg-gray-400 text-white hover:cursor-not-allowed`,
-
+    loadButton: `${buttonClass} bg-amber-600 hover:bg-amber-700 text-white`,
 }
 
 export const darkThemeColors: ThemeColors = {
@@ -39,5 +40,5 @@ export const darkThemeColors: ThemeColors = {
     secondaryButton: `${buttonClass} bg-rose-900 hover:bg-rose-800 text-white`,
     outlineSecondaryButton: `${buttonClass} bg-transparent border border-rose-900 hover:bg-rose-800 text-white`,
     disabledButton: `${buttonClass} bg-gray-700 text-white hover:cursor-not-allowed`,
+    loadButton: `${buttonClass} bg-amber-700 hover:bg-amber-800 text-white`,
 }
-
