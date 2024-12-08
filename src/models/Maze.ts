@@ -32,6 +32,9 @@ export default class Maze{
      */
     private mySize: number;
 
+    /**
+     * The current room.
+     */
     private myCurrentRoom: Room;
     
 
@@ -139,6 +142,13 @@ export default class Maze{
      * Print the maze to the console
     */
 
+    public getCurrentRoom():Room{
+        if(this.myCurrentRoom && this.myCurrentRoom instanceof Room){
+            return this.myCurrentRoom;
+        }
+        return this.findCurrentRoom();
+    }
+
     /**
      * Sets the maze. useful for updating, and probably useful for our save system
      * 
@@ -150,11 +160,30 @@ export default class Maze{
         }
     }
 
+    /**
+     * Sets a room in the maze.
+     * 
+     * @param {theRow, theCol, theRoom} - The row, column, and room to set.
+    */
     public setRoom({theRow, theCol, theRoom}:{theRow:number, theCol:number, theRoom:Room}){
         if(theRow && theCol && this.myRooms[theRow][theCol]){
             this.myRooms[theRow][theCol] = theRoom
         }
     }
+
+
+    /**
+     * Sets the current room.
+     * 
+     * @param {theRoom} - The room to set as the current room.
+    */
+    public setCurrentRoom(theRoom:Room){
+        this.myCurrentRoom = theRoom;
+    }
+
+    /**
+     * Prints the maze to the console.
+    */
     public printMaze(){
         console.log("+" + "-".repeat(this.myRooms[0].length ) + "+");
         for(let row = 0; row < this.myRooms.length; row++){
@@ -249,5 +278,24 @@ export default class Maze{
      */
     public loadMaze() {
         this.fromJSon(localStorage.getItem("maze"));
+    
     }
+
+    public findCurrentRoom():Room {
+        let res = this.myRooms[0][0];
+        if(this.myCurrentRoom && this.myCurrentRoom instanceof Room){
+            res = this.myCurrentRoom;
+        }else{
+            for(let row = 0; row < this.myRooms.length; row++){
+                for(let col = 0; col < this.myRooms[row].length; col++){
+                    let theRoom = this.myRooms[row][col];
+                    if(theRoom.getTypeAsNumber() == 7){
+                        res = theRoom;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
 }
