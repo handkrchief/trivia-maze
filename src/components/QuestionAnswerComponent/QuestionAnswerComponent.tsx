@@ -13,10 +13,10 @@ import GameModal from '../GameModal/GameModal';
  */
 export default function QuestionAnswerComponent() {
 
-    const {myCurrentQuestion, isCorrect, setIsCorrect, setIsAnsweringQuestions,
-            myRoomToNavigateTo, setMyCurrentRoom, myMazeAsNumbers, myMaze,
-                myCurrentRoom, gameOverMessage, setGameOverMessage
-    }  = useMazeContext()
+    const { myCurrentQuestion, isCorrect, setIsCorrect, setIsAnsweringQuestions,
+            myRoomToNavigateTo, setMyCurrentRoom, myMazeAsNumbers, myMaze, myCurrentRoom,
+            gameOverMessage, setGameOverMessage mySize, startOver
+          } = useMazeContext()
     /**
      * The theme and theme colors for the QuestionAnswerComponent.
      */
@@ -83,6 +83,11 @@ export default function QuestionAnswerComponent() {
                 
                 setTimeout(()=>{
                     setIsAnsweringQuestions(false);
+                    let gameOver = myMaze?.canSolve(mySize);
+                    if(!gameOver){
+                       alert("There is no path to the exit! Game Over!")
+                       startOver();
+                    }
                 }, 1000)
             }
         } catch (error) {
