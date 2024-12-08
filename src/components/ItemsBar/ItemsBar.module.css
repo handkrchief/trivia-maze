@@ -1,0 +1,12 @@
+.container{
+    @apply w-full h-full flex flex-row justify-center items-center gap-2 p-4 my-2
+}
+
+.itemContainer{
+    @apply w-full h-full flex flex-row justify-center items-center;
+}
+
+
+.itemContainer{
+    @apply py-4 rounded-lg;
+}
