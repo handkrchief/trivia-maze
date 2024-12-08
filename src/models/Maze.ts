@@ -82,37 +82,34 @@ export default class Maze{
      * @param theSize - The size of the maze.
      * @returns {boolean} - True if the maze can be solved, false otherwise.
     */
-    public canSolve(theSize:number):boolean{
+    public canSolve(theSize:number):boolean {
         let theQueue:Room[] = [];
         let theVisited:boolean[][] = Array.from({length:theSize}, () => Array(theSize).fill(false));
-        let foundExit:boolean = false;
-        let foundStart:boolean = false;
-
-        theQueue.push(this.myStartingRoom);
-        theVisited[0][0] = true;
-
-
+    
         if(!this.myStartingRoom || !this.myExitRoom){
             return false;
         }
-
-
+    
+        theQueue.push(this.myStartingRoom);
+        theVisited[this.myStartingRoom.getRow()][this.myStartingRoom.getCol()] = true;
+    
         while(theQueue.length > 0){
             let theCurrentRoom = theQueue.shift();
             if(!theCurrentRoom){
                 return false;
             }
-            if(theCurrentRoom === this.myExitRoom){
-                foundExit = true;
-            }
-            if(theCurrentRoom === this.myStartingRoom){
-                foundStart = true;
-            }
-            if(foundExit && foundStart){
+    
+            // Check if current room is the exit room
+            if(theCurrentRoom.getRow() === this.myExitRoom.getRow() && 
+               theCurrentRoom.getCol() === this.myExitRoom.getCol()){
                 return true;
             }
-            let theAdjacentRooms = this.getAdjacentRooms(theCurrentRoom);
-            for (let adjRoom of theAdjacentRooms){
+    
+            // Check all four directions
+            const directions = ["north", "south", "east", "west"];
+            for (let direction of directions) {
+                let adjRoom = this.getAdjacentRoom({currentRoom: theCurrentRoom, direction});
+                
                 if(adjRoom 
                     && !theVisited[adjRoom.getRow()][adjRoom.getCol()] 
                     && adjRoom.getIsOpen())
@@ -122,8 +119,10 @@ export default class Maze{
                 }
             }
         }
+    
         return false;
     }
+    
     /**
      * Get the starting room
      * 
@@ -324,9 +323,19 @@ export default class Maze{
                 }
                 this.myRooms = newRooms;
             } 
-            if(loadData.myStartingRoom) this.myStartingRoom = loadData.myStartingRoom;
-            if(loadData.myExitRoom) this.myExitRoom = loadData.myExitRoom;
-            if(loadData.mySize) this.mySize = loadData.mySize;
+            if(loadData.myStartingRoom){
+                let tempStartingRoom = new Room({theRow:loadData.myStartingRoom.myRow, theCol:loadData.myStartingRoom.myCol});
+                tempStartingRoom.fromJson(loadData.myStartingRoom);
+                this.myStartingRoom = tempStartingRoom;
+            };
+            if(loadData.myExitRoom){
+                let tempExitRoom = new Room({theRow:loadData.myExitRoom.myRow, theCol:loadData.myExitRoom.myCol});
+                tempExitRoom.fromJson(loadData.myExitRoom);
+                this.myExitRoom = tempExitRoom;
+            };
+            if(loadData.mySize){
+                this.mySize = loadData.mySize;
+            };
             
         }
     }
