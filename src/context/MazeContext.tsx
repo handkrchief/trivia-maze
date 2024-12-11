@@ -159,6 +159,7 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     setMyPowerUp("");
     setGameOverMessage("");   
     setCheatsAllowed(false);
+    setIsAnsweringQuestions(false);
   }
 
   
