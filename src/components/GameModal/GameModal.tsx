@@ -26,7 +26,6 @@ export default function GameModal() {
           setIsAnsweringQuestions(false);
           setIsCorrect(null);
           setMyRoomToNavigateTo(null);
-          setMyCurrentRoom(null);
           setMyPowerUp("");
           setGameOverMessage("");   
           setCheatsAllowed(false);

@@ -155,11 +155,9 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     setIsAnsweringQuestions(false);
     setIsCorrect(null);
     setMyRoomToNavigateTo(null);
-    setMyCurrentRoom(null);
     setMyPowerUp("");
     setGameOverMessage("");   
     setCheatsAllowed(false);
-    setIsAnsweringQuestions(false);
   }
 
   
