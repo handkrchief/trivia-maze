@@ -1,3 +1,4 @@
+import { useMazeContext } from "../../context/MazeContext";
 import { usePlayerContext } from "../../context/PlayerContext";
 import { useThemeContext } from "../../context/ThemeContext";
 
@@ -13,14 +14,26 @@ import s from "./ItemsBar.module.css";
 export default function ItemsBar() {
     const {items, useItem} = usePlayerContext();
     const {themeColors} = useThemeContext();
+    const {myCurrentQuestion, setMyCurrentQuestion} = useMazeContext();
 
 
     const handleItemUsage = (theItemType:string) => {
         if(theItemType === "50-50"){
             useItem("50-50");
+            let myTempQuestion = myCurrentQuestion;
+            if(myTempQuestion){
+                myTempQuestion.applyFiftyFifty();
+                setMyCurrentQuestion(myTempQuestion);
+            }
         }
         else if(theItemType === "Phone-a-Friend"){
             useItem("Phone-a-Friend");
+            let myTempQuestion = myCurrentQuestion;
+            if(myTempQuestion){
+                let myTempAnswer = myTempQuestion.applyPhoneAFriend();
+                alert("Your friend says the answer is: " + myTempAnswer);
+
+            }
         }
     }
   return (
