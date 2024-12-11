@@ -84,6 +84,7 @@ export default class Player {
         return null;
     }
 
+
     public getItems(): Item[] {
         return this.myItems;
     }
@@ -111,3 +112,4 @@ export default class Player {
         this.myItems = theJson.myItems.map((item: any) => new Item(item));
     }
 }
+
