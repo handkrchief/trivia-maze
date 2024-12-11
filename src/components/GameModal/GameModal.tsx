@@ -6,7 +6,9 @@ import MazeGenerator from "../../models/MazeGenerator";
 import { QuestionsThemes } from "../../types/QuestionTypes";
 export default function GameModal() {
     const {themeColors} = useThemeContext();
-    const {gameOverMessage, setGameOverMessage, startOver, initializeQuestionsFromDB, setMyMazeAsNumbers, setLoading, setStarted, setMyCurrentRoom, setMyMaze, setQuestionsInRooms, mySize } = useMazeContext();
+    const {gameOverMessage, setGameOverMessage, startOver, initializeQuestionsFromDB, setMyMazeAsNumbers,
+       setLoading, setStarted, setMyCurrentRoom, setMyMaze, setQuestionsInRooms, mySize, setIsAnsweringQuestions,
+       setIsCorrect, setMyRoomToNavigateTo, setMyPowerUp, setCheatsAllowed } = useMazeContext();
 
     const handleClickButton = async(): Promise<void> => {
         try {
@@ -21,6 +23,14 @@ export default function GameModal() {
           setMyMaze(myCurrMaze);
           setMyCurrentRoom(myCurrMaze.getStartingRoom());
           setGameOverMessage("");   
+          setIsAnsweringQuestions(false);
+          setIsCorrect(null);
+          setMyRoomToNavigateTo(null);
+          setMyCurrentRoom(null);
+          setMyPowerUp("");
+          setGameOverMessage("");   
+          setCheatsAllowed(false);
+          
         } catch (error) {
           console.error(error);
         } finally {
