@@ -37,6 +37,7 @@ export interface MazeContextType {
   isCorrect: boolean | null;
   gameOverMessage: string;
   myQuestions: Question[] | null;
+  cheatsAllowed: boolean;
   startOver: () => void; 
   setQuestionsInRooms: (theMaze:Maze) => Maze;
   setQuestionInRoom: (theRoom: Room, count: number) => Room | null;
@@ -54,6 +55,7 @@ export interface MazeContextType {
   setMyQuestions: React.Dispatch<React.SetStateAction<Question[] | null>>;
   setIsCorrect: React.Dispatch<React.SetStateAction<boolean | null>>;
   setGameOverMessage: React.Dispatch<React.SetStateAction<string>>;
+  setCheatsAllowed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
@@ -126,6 +128,7 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [myRoomToNavigateTo, setMyRoomToNavigateTo] = useState<Room | null>(null);
   const [gameOverMessage, setGameOverMessage] = useState<string>("");
+  const [cheatsAllowed, setCheatsAllowed] = useState<boolean>(false);
 
   /**
    * Hook that saves the state of the maze after any updates to either the maze itself, or the current room that the player is in
@@ -154,12 +157,11 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     setMyRoomToNavigateTo(null);
     setMyCurrentRoom(null);
     setMyPowerUp("");
-    setGameOverMessage(""); 
+    setGameOverMessage("");   
+    setCheatsAllowed(false);
   }
 
-  useEffect(()=>{
-
-  },[])
+  
 
   const addQuestion = (question:Question) : void =>{
     if(question){
@@ -266,6 +268,7 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     started,
     loading,
     myQuestions,
+    cheatsAllowed,
     startOver,
     initializeQuestionsFromDB,
     setIsAnsweringQuestions,
@@ -282,7 +285,8 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
     setMyCurrentRoom,
     setMyCurrentQuestion,
     setIsCorrect,
-    setGameOverMessage
+    setGameOverMessage,
+    setCheatsAllowed
   };
 
 

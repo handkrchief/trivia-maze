@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { useMazeContext } from '../../context/MazeContext';
 import s from './QuestionAnswerComponent.module.css';
 import { useThemeContext } from '../../context/ThemeContext';
-import GameModal from '../GameModal/GameModal';
+import { usePlayerContext } from '../../context/PlayerContext';
+
 
 /**
  * The QuestionAnswerComponent component, displays the question and answer options.
@@ -15,8 +16,9 @@ export default function QuestionAnswerComponent() {
 
     const { myCurrentQuestion, isCorrect, setIsCorrect, setIsAnsweringQuestions,
             myRoomToNavigateTo, setMyCurrentRoom, myMazeAsNumbers, myMaze, myCurrentRoom,
-            gameOverMessage, setGameOverMessage, mySize, startOver
+            gameOverMessage, setGameOverMessage, mySize, startOver, cheatsAllowed, setCheatsAllowed
           } = useMazeContext()
+    const {player} = usePlayerContext();
     /**
      * The theme and theme colors for the QuestionAnswerComponent.
      */
@@ -49,7 +51,7 @@ export default function QuestionAnswerComponent() {
     const handleClickSubmit = async(e:React.MouseEvent<HTMLButtonElement>) =>{
         e.stopPropagation()
         try {
-            if(mySelectedChoice !== null && myCurrentQuestion){
+            if(mySelectedChoice !== null && myCurrentQuestion && myMaze){
                 const correctAnswer = myCurrentQuestion.getMyCorrectAnswer();
                 const selectedAnswer = myChoices[mySelectedChoice];
                 const isAnswerCorrect = correctAnswer === selectedAnswer;
@@ -60,31 +62,44 @@ export default function QuestionAnswerComponent() {
                 if(isAnswerCorrect){
                     if(myRoomToNavigateTo.getTypeAsNumber() == 9){
                         setGameOverMessage("You have completed the maze!");
-                        alert("You have completed the maze!");
+                        
+                    }
+                    if (myRoomToNavigateTo.hasItem()){
+                        const item = myRoomToNavigateTo.getItem();
+                        if(item){
+                            player.addItem(item);
+                        }
                     }
                     myRoomToNavigateTo.setTypeAsNumber(7);
                     myRoomToNavigateTo.setIsAnswered(true);
 
-                    myMaze?.setCurrentRoom(myRoomToNavigateTo);
+                    myMaze.setCurrentRoom(myRoomToNavigateTo);
                     
                     setMyCurrentRoom(myRoomToNavigateTo);
                     myCurrentRoom?.setTypeAsNumber(1);
                     
                     setMessage("Correct answer!");
                 }else{
+                    if(myRoomToNavigateTo.getTypeAsNumber() == 9){
+                        setGameOverMessage("GAME OVER!");
+                        alert("The Maze cannot be complete...");
+                        return;
+                    } else{
+                        myRoomToNavigateTo.setIsOpen(false);
+                        myRoomToNavigateTo.setIsLocked(true);
+                        myRoomToNavigateTo.setTypeAsNumber(3);
+                        setMessage("Incorrect answer!");
+                    }
            
-                    myRoomToNavigateTo.setIsOpen(false);
-                    myRoomToNavigateTo.setIsLocked(true);
-                    myRoomToNavigateTo.setTypeAsNumber(3);
-                    setMessage("Incorrect answer!");
+                   
                     }
                     myCurrentRoom?.setIsAnswered(true);
                 }
                 
                 setTimeout(()=>{
                     setIsAnsweringQuestions(false);
-                    let gameOver = myMaze?.canSolve(mySize);
-                    if(!gameOver){
+                    let canContinue = myMaze?.canSolve(mySize);
+                    if(!canContinue){
                        alert("There is no path to the exit! Game Over!")
                        startOver();
                     }
@@ -94,7 +109,7 @@ export default function QuestionAnswerComponent() {
             console.log(error);
         }
     }
-
+    const correctAnswer = myCurrentQuestion ? myCurrentQuestion.getMyCorrectAnswer() : "";
     /**
      * The useEffect to set the current text, choices, and reset the isCorrect state.
      * This will run when myCurrentQuestion changes.
@@ -126,7 +141,7 @@ export default function QuestionAnswerComponent() {
                     className={s.answerContainer+ " " 
                     + themeColors.primaryText
                     + " " 
-                    + (mySelectedChoice === idx 
+                    + (mySelectedChoice === idx || (cheatsAllowed &&  choice == correctAnswer)
                     ? "border-2 border-green-400" 
                     : themeColors.primaryOutline)} 
                     onClick={()=>setMySelectedChoice(idx)}>
@@ -135,6 +150,7 @@ export default function QuestionAnswerComponent() {
                 ))}
             </div>
             <div className={s.buttonContainer}>
+                <div className={s.buttonOne}>
                 <button 
                     disabled={message !== ""} 
                     className={
@@ -150,6 +166,9 @@ export default function QuestionAnswerComponent() {
                     onClick={(e)=>handleClickSubmit(e)}>
                     Submit
                 </button>
+                <input type="checkbox" checked={cheatsAllowed} onChange={()=>setCheatsAllowed(!cheatsAllowed)}/>
+                </div>
+                
             </div>
            {message && <div className={s.messageContainer + " " + themeColors.primaryText}>
                         {message}

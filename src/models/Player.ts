@@ -84,11 +84,32 @@ export default class Player {
         return null;
     }
 
-    /**
-     * 
-     * @returns {Item[]} The array of items for a player.
-     */
+
     public getItems(): Item[] {
         return this.myItems;
     }
+
+    public setItems(theItems: Item[]):void {
+        this.myItems = theItems;
+    }
+
+    public removeItem(theItem: Item):void {
+        this.myItems.splice(this.myItems.indexOf(theItem), 1);
+    }
+
+    public clearItems():void {
+        this.myItems = [];
+    }
+
+
+    public hasItem(theItem: Item):boolean {
+        return this.myItems.includes(theItem);
+    }
+
+    public fromJson(theJson: any):void {
+        this.myCurrentRoom = new Room(theJson.myCurrentRoom);
+        this.myScore = theJson.myScore;
+        this.myItems = theJson.myItems.map((item: any) => new Item(item));
+    }
 }
+
