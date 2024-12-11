@@ -70,12 +70,12 @@ export default class Question{
      * 
      * @returns {void}
     */
-    private applyPhoneAFriend(): void {
+    public applyPhoneAFriend(): string {
         let chance = Math.random();
         if(chance < 0.1) {
-            alert( this.wrongAnswer());
+            return this.wrongAnswer();
         } else {
-            alert(this.myCorrectAnswer);
+            return this.myCorrectAnswer;
         }
     }
 
@@ -85,7 +85,7 @@ export default class Question{
      * 
      * @returns {void}
     */
-    private applyFiftyFifty(): void {
+    public applyFiftyFifty(): void {
         if(this.myChoices.includes(Question.INCORRECT_TEXT)){
             console.log("Fifty fifty can only be applied on the first turn.")
             return
