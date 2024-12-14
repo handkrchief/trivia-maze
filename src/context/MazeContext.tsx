@@ -3,6 +3,7 @@ import Room from "../models/Room";
 import Maze from "../models/Maze";
 import Question from "../models/Question";
 import { QuestionsThemes } from "../types/QuestionTypes";
+import QuestionFactory from "../services/QuestionFactory";
 import sampleData from "../data/sampleQuestions.json"
 
 /**
@@ -229,29 +230,25 @@ export const MazeContextProvider: React.FC<MazeContextProviderProps> = ({ childr
   }
 
   /**
-   * Initializes the questions from sample data for now, can be changed for db conn.
+   * Initializes the questions from db.
    * 
    * @param theme - The theme of the questions to set.
    * @param size - The size of the maze.
    * @returns void
   */
-  const initializeQuestionsFromDB = async (theme:QuestionsThemes, size:number) =>{
-    if(theme == "Test"){
-      let i;
-      let count = size*size; 
-      let data = sampleData.Test
-      let sampleQ = data.questions[1]
-      for(i=0; i<count; i++){
-        let newQ = new Question(
-          sampleQ.questionText,
-          sampleQ.correctAnswer,
-          sampleQ.choices
-        );
-        addQuestion(newQ);
+  const initializeQuestionsFromDB = async (theme: QuestionsThemes, size: number) => {
+    try {
+      const questions = await QuestionFactory.fetchQuestionsFromAPI(theme);
+      let count = size * size;
+  
+      for (let i = 0; i < count; i++) {
+        const question = questions[i % questions.length]; // Reuse questions if not enough
+        addQuestion(question);
       }
+    } catch (error) {
+      console.error('Error initializing questions:', error);
     }
-    
-  }
+  };
 
   const value: MazeContextType = {
     myMazeAsNumbers,
