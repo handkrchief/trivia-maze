@@ -4,4 +4,4 @@ export interface QuestionDataProps{
     choices:string[];
 }
 
-export type QuestionsThemes = "Test" | "Example" | "Math"
+export type QuestionsThemes = "Test" | "Example" | "geography"
