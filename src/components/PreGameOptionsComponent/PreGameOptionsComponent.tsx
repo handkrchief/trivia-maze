@@ -38,7 +38,7 @@ export default function PreGameOptionsComponent() {
     const handleClickButton = async(): Promise<void> => {
         try {
           const chosenThemeAsTest: QuestionsThemes = "geography"
-          initializeQuestionsFromDB(chosenThemeAsTest, mySize);
+          await initializeQuestionsFromDB(chosenThemeAsTest, mySize);
           const myMazeGenerator:MazeGenerator = new MazeGenerator();
           const myMazeAsNumbers:number[][] = myMazeGenerator.mazeGeneration(mySize);
           let myCurrMaze:Maze = new Maze(myMazeAsNumbers);
