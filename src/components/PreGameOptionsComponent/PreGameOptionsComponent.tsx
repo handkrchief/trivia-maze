@@ -65,7 +65,7 @@ export default function PreGameOptionsComponent() {
       }
 
       const handleLoadButton = () => {
-        const chosenThemeAsTest: QuestionsThemes = "Test"
+        const chosenThemeAsTest: QuestionsThemes = "geography"
         initializeQuestionsFromDB(chosenThemeAsTest, mySize);
         const myMazeGenerator:MazeGenerator = new MazeGenerator();
         const myMazeAsNumbers:number[][] = myMazeGenerator.mazeGeneration(mySize);
