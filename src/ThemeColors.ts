@@ -10,6 +10,8 @@ export interface ThemeColors {
     disabledButton: string;
     outlinePrimaryButton: string;
     outlineSecondaryButton: string;
+    helpButton: string;
+    aboutButton: string;
 }
 
 export const buttonClass = "py-2 px-4 rounded  transition-all duration-300 ";
@@ -27,6 +29,8 @@ export const lightThemeColors: ThemeColors = {
     outlineSecondaryButton: `${buttonClass} bg-transparent border border-rose-600 hover:bg-rose-500 text-white`,
     disabledButton: `${buttonClass} bg-gray-400 text-white hover:cursor-not-allowed`,
     loadButton: `${buttonClass} bg-amber-600 hover:bg-amber-700 text-white`,
+    helpButton: `${buttonClass} bg-blue-600 hover:bg-blue-700 text-white`,
+    aboutButton: `${buttonClass} bg-green-600 hover:bg-green-700 text-white`,
 }
 
 export const darkThemeColors: ThemeColors = {
@@ -41,4 +45,6 @@ export const darkThemeColors: ThemeColors = {
     outlineSecondaryButton: `${buttonClass} bg-transparent border border-rose-900 hover:bg-rose-800 text-white`,
     disabledButton: `${buttonClass} bg-gray-700 text-white hover:cursor-not-allowed`,
     loadButton: `${buttonClass} bg-amber-700 hover:bg-amber-800 text-white`,
+    helpButton: `${buttonClass} bg-blue-900 hover:bg-blue-800 text-white`,
+    aboutButton: `${buttonClass} bg-green-900 hover:bg-green-800 text-white`,
 }
