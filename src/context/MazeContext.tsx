@@ -11,7 +11,8 @@ import sampleData from "../data/sampleQuestions.json"
  *
  *  @author Zach Sanchez (zachs00)
  *  @author Caleb Carroll (calebca)
- *  @version November 17th, 2024
+ *  @author Ethan Moore (handkrchief)
+ *  @version December 13th, 2024
  */
 
 

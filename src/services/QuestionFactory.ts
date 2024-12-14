@@ -1,6 +1,18 @@
+/**
+ * QuestionFactory service
+ * 
+ * Handles fetching and creating Question instances from the API.
+ * 
+ * @author Ethan Moore (handkrchief)
+ * @version December 13th, 2024
+ */
+
 import Question from '../models/Question';
 import { QuestionsThemes } from '../types/QuestionTypes';
 
+/**
+ * Factory class for creating Question instances from API data.
+ */
 export default class QuestionFactory {
   private static BASE_URL = 'http://localhost:3001/api';
 
