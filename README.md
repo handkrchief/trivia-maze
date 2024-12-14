@@ -8,7 +8,7 @@ A trivia-based maze game where players navigate through a maze by answering ques
 
 - **Dark Mode**: A visually appealing dark theme to enhance gameplay experience.
 - **Items (Coming Soon)**: Players can collect and use items as they progress through the maze.
-- **Save States (Coming Soon)**: Allow players to save and resume their progress.
+- **Save States**: Allow players to save and resume their progress.
 
 ---
 
@@ -22,9 +22,9 @@ A trivia-based maze game where players navigate through a maze by answering ques
    ```bash
    npm install
    ```
-3. Start the development server:
+3. Start the test server:
    ```bash
-   npm run dev
+   npm run start
    ```
 4. Open the app in your browser at http://localhost:5173.
 
@@ -34,6 +34,7 @@ A trivia-based maze game where players navigate through a maze by answering ques
 ## Database Setup
 
 The game uses an SQLite database for managing trivia questions and related data.
+(The database is already setup in it's current implementation but if for any reason you need to again)
 
 1. Navigate to the database folder:
    ```bash
@@ -74,6 +75,6 @@ The original implementation of this project was written in Java. These files hav
 ## Tech Stack
 
 - Frontend: React, Vite, TypeScript, Tailwind CSS
-- Backend: SQLite
+- Backend: SQLite, Express
 - Development Tools: SQLite Viewer, VSCode, npm
 
